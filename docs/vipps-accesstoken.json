@@ -1,0 +1,193 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Vipps Access Token API contains the endpoints to issue JWT access token from Azure AD. Vipps merchant apis access is authorized againstthis access token. Client should get the access token from this service and use it in 'Authorization' header of the request while calling the business services.",
+    "version": "1.0",
+    "title": "Vipps Access Token",
+    "contact": {}
+  },
+  "host": "sit02gw.api.test.tech-02.net",
+  "basePath": "/api/access-token",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "paths": {
+    "/jwt-token": {
+      "post": {
+        "summary": "Obtain Access Token",
+        "description": "Create Jwt Access Token endpoint helps to get the JWT Bearer token that needs to be passed in every api request in the authorization header. Merchant application use the <'client_id'>, <'client_secret'> and <'resource'> parameters in the request body to get a JWT access token. JWT access token is a base 64 encoded string value that must be acquire first before making any Vipps api calls.",
+        "operationId": "obtain-access-token-by-post",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accessTokenPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/accessToken"
+            }
+          },
+          "400": {
+            "description": "This error can happen, if 'client_id' or'resource' is not correct.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "This error can happen, if 'client_secret' is not correct.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "accessTokenPost": {
+      "type": "object",
+      "required": [
+        "client_id",
+        "client_secret",
+        "resource"
+      ],
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "description": "Client ID is a guid formatted string and is received when merchant registered the application. Sometime Vipps system register the application on behalf of merchant to ease the process."
+        },
+        "client_secret": {
+          "type": "string",
+          "description": "Client Secret is a base 64 string and is received when merchant registered the application. Sometime Vipps system register the application on behalf of merchant to ease the process."
+        },
+        "resource": {
+          "type": "string",
+          "description": "This parameters is required to issue the access token for a particular service product registered in Vipps. This resources are like eCommerce, InApp, Invoices, PSP, Ministore services. The format of the resource parameter looks like a URL.",
+          "example": "https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162"
+        }
+      },
+      "example": "{\n   \"client_id\":\"<clientId>\",\n   \"client_secret\":\"<clientSecret>\",\n   \"resource\":\"<resource>\"\n}"
+    },
+    "accessToken": {
+      "type": "object",
+      "required": [
+        "access_token",
+        "expires_in",
+        "expires_on",
+        "ext_expires_in",
+        "not_before",
+        "resource",
+        "token_type"
+      ],
+      "properties": {
+        "token_type": {
+          "type": "string",
+          "description": "It’s a bearer type token. When used the word ‘Bearer’ must be added before the token value. However the 'Bearer' word is optional and case insensitive in Vipps system while using in 'Authorization' header of the merchant request.",
+          "example": "Bearer"
+        },
+        "expires_in": {
+          "type": "string",
+          "description": "Token expiry duration in seconds",
+          "example": "86398"
+        },
+        "ext_expires_in": {
+          "type": "string",
+          "description": "extra expiry time. This is zero only",
+          "example": "0"
+        },
+        "expires_on": {
+          "type": "string",
+          "description": "Token expiry time in epoch time format",
+          "example": "1495271273"
+        },
+        "not_before": {
+          "type": "string",
+          "description": "Token creation time in epoch time format",
+          "example": "1495184574"
+        },
+        "resource": {
+          "type": "string",
+          "description": "For the product for which token has been issued",
+          "example": "https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162"
+        },
+        "access_token": {
+          "type": "string",
+          "description": "This is the actual access token that needs to be used in 'Authorization' request header with 'bearer ' prefix. Please add an space after 'bearer' word",
+          "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InowMzl6ZHNGdWl6cEJm <...>"
+        }
+      },
+      "example": "{\n  \"token_type\": \"Bearer\",\n  \"expires_in\": \"86398\",\n  \"ext_expires_in\": \"0\",\n  \"expires_on\": \"1495271273\",\n  \"not_before\": \"1495184574\",\n  \"resource\": \"https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162\",\n  \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InowMzl6ZHNGdWl6cEJmQlZLMVRuMjVRSFlPMCIsImtpZCI6InowMzl6ZHNGdWl6cEJmQlZLMVRuMjVRSFlPMCJ9.eyJhdWQiOiIwMDAwMDAwMi0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9lNTExNjUyNi01MWRjLTRjMTQtYjA4Ni1hNWNiNDcxNmJjNGIvIiwiaWF0IjoxNDk1MTg0NTc0LCJuYmYiOjE0OTUxODQ1NzQsImV4cCI6MTQ5NTI3MTI3MywiYWlvIjoiWTJaZ1lGQVdFcmdncnJWbS9wY3ZENDJ6NzI1NUJnQT0iLCJhcHBpZCI6ImQ5YjZjOTlkLTI0NDItNGE1ZC04NGEyLWM1M2E4MDdmZTBjNCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2U1MTE2NTI2LTUxZGMtNGMxNC1iMDg2LWE1Y2I0NzE2YmM0Yi8iLCJ0aWQiOiJlNTExNjUyNi01MWRjLTRjMTQtYjA4Ni1hNWNiNDcxNmJjNGIiLCJ1dGkiOiJuYTJBczl2SWlVMm12UTRzVUprRkFBIiwidmVyIjoiMS4wIn0.QaopYuvN8jsh82uepLcF-uLqEhdFsRNl6_KrjAva537HHMa2x6w2pL2v96k40QBjD8A_GGHZ-E2VC3QSY-WsPdHUI5Kb4zEQzJ4-_CnMRo3bXavz3Sdo2-1amFKsOY8AFODpqJR0MYqPK_Kr6sSIWL3M_L3wu0rG976HIXllsRLvWBSwDeMgBAUvwWrXCmnVfznOleSxsPbAxZshn3xjuYeJWEAR7ZpJQhjuGpiu0rP7lERTxX_rCnW1cr3m7RfEl6z8e5VQva9AOt4OG5NuIrLJqmhb3KHBa3GusK6KLf-pVjF6fnS5r0ZQ5foP-VqOCiK9CUUATjHEOflgy1ubvA\"\n}"
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "correlation_id",
+        "error",
+        "error_codes",
+        "error_description",
+        "timestamp",
+        "trace_id"
+      ],
+      "properties": {
+        "error": {
+          "type": "string",
+          "example": "unauthorized_client"
+        },
+        "error_description": {
+          "type": "string",
+          "example": "AADSTS70001: Application with identifier 'e9b6c99d-2442-4a5d-84a2-c53a807fe0c4' was not found in the directory testapivipps.no\\r\\nTrace ID: 3bc2b2a0-d9bb-4c2e-8367-5633866f1300\\r\\nCorrelation ID: bb2f4093-70aAuthorizationTokenResponsef-446a-a26d-ed8becca1a1a\\r\\nTimestamp: 2017-05-19 09:21:28Z\",\n  \"error_codes"
+        },
+        "error_codes": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "example": 70001
+          }
+        },
+        "timestamp": {
+          "type": "string",
+          "example": "2017-05-19 09:21:28Z"
+        },
+        "trace_id": {
+          "type": "string",
+          "example": "3bc2b2a0-d9bb-4c2e-8367-5633866f1300"
+        },
+        "correlation_id": {
+          "type": "string",
+          "example": "bb2f4093-70af-446a-a26d-ed8becca1a1a"
+        }
+      },
+      "example": "{\n  \"error\": \"unauthorized_client\",\n  \"error_description\": \"AADSTS70001: Application with identifier 'e9b6c99d-2442-4a5d-84a2-c53a807fe0c4' was not found in the directory testapivipps.no\\r\\nTrace ID: 3bc2b2a0-d9bb-4c2e-8367-5633866f1300\\r\\nCorrelation ID: bb2f4093-70af-446a-a26d-ed8becca1a1a\\r\\nTimestamp: 2017-05-19 09:21:28Z\",\n  \"error_codes\": [\n    70001\n  ],\n  \"timestamp\": \"2017-05-19 09:21:28Z\",\n  \"trace_id\": \"3bc2b2a0-d9bb-4c2e-8367-5633866f1300\",\n  \"correlation_id\": \"bb2f4093-70af-446a-a26d-ed8becca1a1a\"\n}"
+    }
+  }
+}

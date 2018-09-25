@@ -1,0 +1,165 @@
+---
+swagger: "2.0"
+info:
+  description: "Vipps Access Token API contains the endpoints to issue JWT access\
+    \ token from Azure AD. Vipps merchant apis access is authorized againstthis access\
+    \ token. Client should get the access token from this service and use it in 'Authorization'\
+    \ header of the request while calling the business services."
+  version: "1.0"
+  title: "Vipps Access Token"
+  contact: {}
+host: "sit02gw.api.test.tech-02.net"
+basePath: "/api/access-token"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+security:
+- apiKeyHeader: []
+paths:
+  /jwt-token:
+    post:
+      summary: "Obtain Access Token"
+      description: "Create Jwt Access Token endpoint helps to get the JWT Bearer token\
+        \ that needs to be passed in every api request in the authorization header.\
+        \ Merchant application use the <'client_id'>, <'client_secret'> and <'resource'>\
+        \ parameters in the request body to get a JWT access token. JWT access token\
+        \ is a base 64 encoded string value that must be acquire first before making\
+        \ any Vipps api calls."
+      operationId: "obtain-access-token-by-post"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/accessTokenPost"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/accessToken"
+        400:
+          description: "This error can happen, if 'client_id' or'resource' is not\
+            \ correct."
+          schema:
+            $ref: "#/definitions/error"
+        401:
+          description: "This error can happen, if 'client_secret' is not correct."
+          schema:
+            $ref: "#/definitions/error"
+securityDefinitions:
+  apiKeyHeader:
+    type: "apiKey"
+    name: "Ocp-Apim-Subscription-Key"
+    in: "header"
+  apiKeyQuery:
+    type: "apiKey"
+    name: "subscription-key"
+    in: "query"
+definitions:
+  accessTokenPost:
+    type: "object"
+    required:
+    - "client_id"
+    - "client_secret"
+    - "resource"
+    properties:
+      client_id:
+        type: "string"
+        description: "Client ID is a guid formatted string and is received when merchant\
+          \ registered the application. Sometime Vipps system register the application\
+          \ on behalf of merchant to ease the process."
+      client_secret:
+        type: "string"
+        description: "Client Secret is a base 64 string and is received when merchant\
+          \ registered the application. Sometime Vipps system register the application\
+          \ on behalf of merchant to ease the process."
+      resource:
+        type: "string"
+        description: "This parameters is required to issue the access token for a\
+          \ particular service product registered in Vipps. This resources are like\
+          \ eCommerce, InApp, Invoices, PSP, Ministore services. The format of the\
+          \ resource parameter looks like a URL."
+        example: "https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162"
+  accessToken:
+    type: "object"
+    required:
+    - "access_token"
+    - "expires_in"
+    - "expires_on"
+    - "ext_expires_in"
+    - "not_before"
+    - "resource"
+    - "token_type"
+    properties:
+      token_type:
+        type: "string"
+        description: "It’s a bearer type token. When used the word ‘Bearer’ must be\
+          \ added before the token value. However the 'Bearer' word is optional and\
+          \ case insensitive in Vipps system while using in 'Authorization' header\
+          \ of the merchant request."
+        example: "Bearer"
+      expires_in:
+        type: "string"
+        description: "Token expiry duration in seconds"
+        example: "86398"
+      ext_expires_in:
+        type: "string"
+        description: "extra expiry time. This is zero only"
+        example: "0"
+      expires_on:
+        type: "string"
+        description: "Token expiry time in epoch time format"
+        example: "1495271273"
+      not_before:
+        type: "string"
+        description: "Token creation time in epoch time format"
+        example: "1495184574"
+      resource:
+        type: "string"
+        description: "For the product for which token has been issued"
+        example: "https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162"
+      access_token:
+        type: "string"
+        description: "This is the actual access token that needs to be used in 'Authorization'\
+          \ request header with 'bearer ' prefix. Please add an space after 'bearer'\
+          \ word"
+        example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InowMzl6ZHNGdWl6cEJm\
+          \ <...>"
+  error:
+    type: "object"
+    required:
+    - "correlation_id"
+    - "error"
+    - "error_codes"
+    - "error_description"
+    - "timestamp"
+    - "trace_id"
+    properties:
+      error:
+        type: "string"
+        example: "unauthorized_client"
+      error_description:
+        type: "string"
+        example: "AADSTS70001: Application with identifier 'e9b6c99d-2442-4a5d-84a2-c53a807fe0c4'\
+          \ was not found in the directory testapivipps.no\\r\\nTrace ID: 3bc2b2a0-d9bb-4c2e-8367-5633866f1300\\\
+          r\\nCorrelation ID: bb2f4093-70af-446a-a26d-ed8becca1a1a\\r\\nTimestamp:\
+          \ 2017-05-19 09:21:28Z\",\n  \"error_codes"
+      error_codes:
+        type: "array"
+        items:
+          type: "number"
+          example: 70001
+      timestamp:
+        type: "string"
+        example: "2017-05-19 09:21:28Z"
+      trace_id:
+        type: "string"
+        example: "3bc2b2a0-d9bb-4c2e-8367-5633866f1300"
+      correlation_id:
+        type: "string"
+        example: "bb2f4093-70af-446a-a26d-ed8becca1a1a"
