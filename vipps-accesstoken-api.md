@@ -38,7 +38,7 @@ Ocp-Apim-Subscription-Key: <Ocp-Apim-Subscription-Key>
 
 ```
 
-The `resource` must be a valid Vipps peroduct resource.
+The `resource` must be a valid Vipps product resource.
 
 ## Response
 
