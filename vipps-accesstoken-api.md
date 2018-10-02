@@ -7,7 +7,7 @@ Please use GitHub's built-in functionality for
 [pull requests](https://github.com/vippsas/vipps-invoice-api/pulls),
 or contact us at integration@vipps.no.
 
-Document version: 0.1.1.
+Document version: 0.1.2.
 
 # Obtaining an access token
 
@@ -18,6 +18,8 @@ In order to obtain an access token, you will need to visit the Vipps Developer P
 retrieve your `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`
 See
 [the getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md).
+
+The access token is valid for 24 hours.
 
 Shortly summarized, you will have to make the following request
 (`client_id`, `client_secret` and `Ocp-Apim-Subscription-Key` placeholders must be replaced with real values):
