@@ -1,4 +1,4 @@
-# Vipps Invoice API
+# Vipps Access Token API
 
 This is the API documentation for obtaining a Vipps Access Token.
 
@@ -7,15 +7,22 @@ Please use GitHub's built-in functionality for
 [pull requests](https://github.com/vippsas/vipps-invoice-api/pulls),
 or contact us at integration@vipps.no.
 
-Document version: 0.1.0.
+Document version: 0.1.1.
 
-# Getting an access token
+# Obtaining an access token
 
-A valid access token is required in order to call Vipps APIs.
+A valid access token is required in order to call all Vipps APIs.
 The Vipps APIs are provided by Azure API Management - think of it as the gateway to the API.
+
+In order to obtain an access token, you will need to visit the Vipps Developer Portal to
+retrieve your `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`
+See
+[the getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md).
 
 Shortly summarized, you will have to make the following request
 (`client_id`, `client_secret` and `Ocp-Apim-Subscription-Key` placeholders must be replaced with real values):
+
+## Request
 
 ```http
 POST https://apitest.vipps.no/api/access-token/jwt-token HTTP/1.1
@@ -31,11 +38,9 @@ Ocp-Apim-Subscription-Key: <Ocp-Apim-Subscription-Key>
 
 ```
 
-The `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key` are available in the
-Vipps Developer Portal. See
-[the getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md).
-
 The `resource` must be either `https://testapivipps.no/vippsas/invoice-isp-service` or `https://testapivipps.no/vippsas/invoice-ipp-service`.
+
+## Response
 
 The request above will return a response similar to this, with the `access_token`:
 
@@ -51,6 +56,8 @@ HTTP 200 OK
   "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <continued>"
 }
 ```
+
+## Subsequent API calls
 
 Every request to the API needs to have an `Authorization` header with the generated token.
 
