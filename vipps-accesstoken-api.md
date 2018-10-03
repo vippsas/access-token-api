@@ -5,7 +5,8 @@ This is the API documentation for obtaining a Vipps Access Token.
 The Swagger documentation is available at https://vippsas.github.io/vipps-accesstoken-api/.
 
 Please use GitHub's built-in functionality for
-[issues](https://github.com/vippsas/vipps-invoice-api/issues),
+[issues](https://github.com/vippsas/vipps-invoice-api/issues)
+and
 [pull requests](https://github.com/vippsas/vipps-invoice-api/pulls),
 or contact us at integration@vipps.no.
 
@@ -94,7 +95,7 @@ HTTP 200 OK
 | `resource`                  | For the product for which token has been issued. |
 | `access_token`              | The actual access token that needs to be used in `Authorization` request header. |
 
-*Please note:* The access token is valid for 24 hours.
+**Please note:** The access token is valid for 24 hours.
 
 ## Subsequent API calls
 
@@ -112,10 +113,10 @@ This API returns the following HTTP statuses in the responses:
 
 | HTTP status         | Description                                 |
 | ------------------- | ------------------------------------------- |
-| `200 OK`            | Request successful                          |
-| `400 Bad Request`   | Invalid request, see the error for details  |
-| `401 Unauthorized`  | Invalid credentials                         |
-| `403 Forbidden`     | Authentication ok, but credentials lacks authorization  |
+| `200 OK`            | Request successful.                          |
+| `400 Bad Request`   | Invalid request, see the error for details.  |
+| `401 Unauthorized`  | Invalid credentials.                         |
+| `403 Forbidden`     | Authentication ok, but credentials lacks authorization.  |
 | `500 Server Error`  | An internal Vipps problem.                  |
 
 All error responses contains an `error` object in the body, with details of the problem.
