@@ -1,38 +1,35 @@
 ---
 swagger: "2.0"
 info:
-  description: "Vipps Access Token API contains the endpoints to issue JWT access\
-    \ token from Azure AD. Vipps merchant apis access is authorized againstthis access\
-    \ token. Client should get the access token from this service and use it in 'Authorization'\
-    \ header of the request while calling the business services.
-    Vipps is currently providing two (2) authorization token endpoints. The default endpoint is the new endpoint and will be provided for all products in the future. The legacy endpoint can be utilized as is on existing products for now.
+  description: >-
+    Vipps Access Token API contains the endpoints to issue JWT access token from Azure AD.
+    Vipps merchant apis access is authorized againstthis access token.
+    Client should get the access token from this service and use it in 'Authorization' header of the request while calling the business services.
+    Vipps is currently providing two (2) authorization token endpoints.
+    The default endpoint is the _new_ endpoint and will be provided for all API products in the future.
+    The legacy endpoint can be utilized as is on existing products for now.
 
     # Differences between default and legacy
 
-  The main differences between Default and Legacy is the format of the request, and the number of subscription keys you as an integratior need to manage. 1 for Default, 2 for Legacy.
+    The main differences between Default and Legacy is the format of the request,
+    and the number of subscription keys you as an integratior need to manage: 1 key for Default, 2 keys for Legacy.
 
     # Resource
 
-    The default endpoint has a resource field, this field indicates what resource your token should be generated for example, recurring and invoice. The following resources are currently available
+    The default endpoint has a resource field, this field indicates what resource your token should be generated for example, recurring and invoice.
+    The following resources are currently available:
 
+    ```
+    Recurring: https://testapivipps.no/vippsas/recurring-payment-service
+    ```
 
-  ```
-  Resource Recurring: https://testapivipps.no/vippsas/recurring-payment-service
-  ```
+    ```
+    Invoice ISP: https://testapivipps.no/vippsas/invoice-isp-service
+    ```
 
-
-  ```
-  Resource Invoice ISP: https://testapivipps.no/vippsas/invoice-isp-service
-  ```
-
-
-  ```
-  Resource Invoice IPP: https://testapivipps.no/vippsas/invoice-ipp-service
-  ```
-
-  \
-
-  "
+    ```
+    Invoice IPP: https://testapivipps.no/vippsas/invoice-ipp-service
+    ```
   version: "1.0"
   title: "Vipps Access Token"
   contact: {}
@@ -55,7 +52,7 @@ security:
 paths:
   /jwt:
     post:
-      summary: "Obtain Access Token"
+      summary: "Obtain Access Token (default version)"
       description: "Obtain the JWT access token that needs to be passed in every API request in the Authorization header."
       operationId: "obtain-access-token-by-post"
       consumes:
@@ -84,7 +81,7 @@ paths:
     post:
       tags:
         - Authorization Service
-      summary: Fetch authorization token
+      summary: Fetch authorization token (legacy version)
       parameters:
         - name: client_id
           in: header
