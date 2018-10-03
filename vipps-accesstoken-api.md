@@ -24,7 +24,7 @@ retrieve your `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`:
 | --------------------------- | ------------------------------------------- |
 | `client_id`                 | Client ID is a guid formatted string and is received when merchant registered the application. Sometime Vipps system register the application on behalf of merchant to ease the process. |
 | `client_secret`             | Client Secret is a base 64 string and is received when merchant registered the application. Sometime Vipps system register the application on behalf of merchant to ease the process. |        
-| `Ocp-Apim-Subscription-Key` | Subscription key |
+| `Ocp-Apim-Subscription-Key` | Subscription key. This is _the same key_ for the access token and the product.  |
 
 See the Vipps Developer Portal
 [getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md)
