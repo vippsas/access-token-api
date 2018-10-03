@@ -57,17 +57,12 @@ and this must be a valid Vipps product resource.
 
 The following resources are currently available:
 
-```
-Recurring: https://testapivipps.no/vippsas/recurring-payment-service
-```
+| Resource                    | Description                                 |
+| --------------------------- | ------------------------------------------- |
+| Recurring  |  https://testapivipps.no/vippsas/recurring-payment-service |
+| Invoice ISP  | https://testapivipps.no/vippsas/invoice-isp-service  |
+| Invoice IPP   |  https://testapivipps.no/vippsas/invoice-ipp-service |
 
-```
-Invoice ISP: https://testapivipps.no/vippsas/invoice-isp-service
-```
-
-```
-Invoice IPP: https://testapivipps.no/vippsas/invoice-ipp-service
-```
 
 ## Response
 
