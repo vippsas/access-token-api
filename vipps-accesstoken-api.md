@@ -2,6 +2,8 @@
 
 This is the API documentation for obtaining a Vipps Access Token.
 
+The Swagger documentation is available at https://vippsas.github.io/vipps-accesstoken-api/.
+
 Please use GitHub's built-in functionality for
 [issues](https://github.com/vippsas/vipps-invoice-api/issues),
 [pull requests](https://github.com/vippsas/vipps-invoice-api/pulls),
@@ -13,8 +15,7 @@ Document version: 0.1.4.
 
 A valid access token is required in order to call all Vipps APIs.
 The Vipps APIs are provided by
-[Azure API Management](https://docs.microsoft.com/en-us/azure/api-management/api-management-key-concepts)
-- think of it as the gateway to the API.
+[Azure API Management](https://docs.microsoft.com/en-us/azure/api-management/api-management-key-concepts) - think of it as the gateway to the API.
 
 In order to obtain an access token, you will need to visit the Vipps Developer Portal and
 retrieve your `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`:
@@ -25,14 +26,13 @@ retrieve your `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`:
 | `client_secret`             | Client Secret is a base 64 string and is received when merchant registered the application. Sometime Vipps system register the application on behalf of merchant to ease the process. |        
 | `Ocp-Apim-Subscription-Key` | Subscription key |
 
-
-See
-[the getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md)
-for the Vipps Developer Portal for more details.
-
-Shortly summarized, you will have to make a request similar to the one below, where the following placeholders must be replaced with real values:
+See the Vipps Developer Portal
+[getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md)
+for more details.
 
 ## Request
+
+Shortly summarized, you will have to make a request similar to the one below, with the placeholders replaced with real values:
 
 ```http
 POST https://apitest.vipps.no/api/v2/access-token/jwt HTTP/1.1
@@ -63,10 +63,9 @@ The following resources are currently available:
 | Invoice ISP  | https://testapivipps.no/vippsas/invoice-isp-service  |
 | Invoice IPP   |  https://testapivipps.no/vippsas/invoice-ipp-service |
 
-
 ## Response
 
-The request above will return a response similar to this, with the `access_token`:
+The request above will return a response similar to this, with the generated `access_token`:
 
 ```http
 HTTP 200 OK
@@ -99,11 +98,25 @@ HTTP 200 OK
 
 Every request to the API needs to have an `Authorization` header with the generated access token.
 
-The header in the request should look like this:
+The header in all API requests should look like this:
 
 ```http
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <continued>
 ```
+
+# HTTP responses
+
+This API returns the following HTTP statuses in the responses:
+
+| HTTP status         | Description                                 |
+| ------------------- | ------------------------------------------- |
+| `200 OK`            | Request successful                          |
+| `400 Bad Request`   | Invalid request, see the error for details  |
+| `401 Unauthorized`  | Invalid credentials                         |
+| `403 Forbidden`     | Authentication ok, but credentials lacks authorization  |
+| `500 Server Error`  | An internal Vipps problem.                  |
+
+All error responses contains an `error` object in the body, with details of the problem.
 
 # Questions or comments
 
