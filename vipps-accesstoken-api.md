@@ -7,27 +7,35 @@ Please use GitHub's built-in functionality for
 [pull requests](https://github.com/vippsas/vipps-invoice-api/pulls),
 or contact us at integration@vipps.no.
 
-Document version: 0.1.2.
+Document version: 0.1.4.
 
 # Obtaining an access token
 
 A valid access token is required in order to call all Vipps APIs.
-The Vipps APIs are provided by Azure API Management - think of it as the gateway to the API.
+The Vipps APIs are provided by
+[Azure API Management](https://docs.microsoft.com/en-us/azure/api-management/api-management-key-concepts)
+- think of it as the gateway to the API.
 
-In order to obtain an access token, you will need to visit the Vipps Developer Portal to
-retrieve your `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`
+In order to obtain an access token, you will need to visit the Vipps Developer Portal and
+retrieve your `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`:
+
+| Name                        | Description                                 |
+| --------------------------- | ------------------------------------------- |
+| `client_id`                 | Client ID is a guid formatted string and is received when merchant registered the application. Sometime Vipps system register the application on behalf of merchant to ease the process. |
+| `client_secret`             | Client Secret is a base 64 string and is received when merchant registered the application. Sometime Vipps system register the application on behalf of merchant to ease the process. |        
+| `Ocp-Apim-Subscription-Key` | Subscription key |
+
+
 See
-[the getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md).
+[the getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md)
+for the Vipps Developer Portal for more details.
 
-The access token is valid for 24 hours.
-
-Shortly summarized, you will have to make the following request
-(`client_id`, `client_secret` and `Ocp-Apim-Subscription-Key` placeholders must be replaced with real values):
+Shortly summarized, you will have to make a request similar to the one below, where the following placeholders must be replaced with real values:
 
 ## Request
 
 ```http
-POST https://apitest.vipps.no/api/access-token/jwt-token HTTP/1.1
+POST https://apitest.vipps.no/api/v2/access-token/jwt HTTP/1.1
 Host: apitest.vipps.no
 Content-Type: application/json
 Ocp-Apim-Subscription-Key: <Ocp-Apim-Subscription-Key>
@@ -40,7 +48,26 @@ Ocp-Apim-Subscription-Key: <Ocp-Apim-Subscription-Key>
 
 ```
 
-The `resource` must be a valid Vipps product resource.
+The `Ocp-Apim-Subscription-Key` is a required header, and it is the same subscription key as for the product itself.
+
+### Resource
+
+This `resource` field indicates what resource your token should be generated for,
+and this must be a valid Vipps product resource.
+
+The following resources are currently available:
+
+```
+Recurring: https://testapivipps.no/vippsas/recurring-payment-service
+```
+
+```
+Invoice ISP: https://testapivipps.no/vippsas/invoice-isp-service
+```
+
+```
+Invoice IPP: https://testapivipps.no/vippsas/invoice-ipp-service
+```
 
 ## Response
 
@@ -59,11 +86,25 @@ HTTP 200 OK
 }
 ```
 
+### Details
+
+| Name                        | Description                                 |
+| --------------------------- | ------------------------------------------- |
+| `Bearer`                    | It’s a `Bearer` token. The word `Bearer` should be added before the token, but this is optional and case insensitive in Vipps. |
+| `expires_in`                | Token expiry duration in seconds. |
+| `ext_expires_in`            | Extra expiry time. This is always zero. |
+| `expires_on`                | Token expiry time in epoch time format. |
+| `not_before`                | Token creation time in epoch time format. |
+| `resource`                  | For the product for which token has been issued. |
+| `access_token`              | The actual access token that needs to be used in `Authorization` request header. |
+
+*Please note:* The access token is valid for 24 hours.
+
 ## Subsequent API calls
 
-Every request to the API needs to have an `Authorization` header with the generated token.
+Every request to the API needs to have an `Authorization` header with the generated access token.
 
-The header in the request to this API should look like this:
+The header in the request should look like this:
 
 ```http
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <continued>

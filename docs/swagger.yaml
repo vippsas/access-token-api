@@ -5,36 +5,24 @@ info:
     Vipps Access Token API contains the endpoints to issue JWT access token from Azure AD.
     Vipps merchant apis access is authorized againstthis access token.
     Client should get the access token from this service and use it in 'Authorization' header of the request while calling the business services.
-    Vipps is currently providing two (2) authorization token endpoints.
-    The default endpoint is the _new_ endpoint and will be provided for all API products in the future.
-    The legacy endpoint can be utilized as is on existing products for now.
 
-    # Differences between default and legacy
+    Vipps is currently providing two (2) authorization token endpoints:
+    * The *default* endpoint is the _new_ endpoint and will be provided for all API products.
+    * The *legacy* endpoint can be utilized as-is on existing products for now.
+
+    # Differences between default and legacy endpoints
 
     The main differences between Default and Legacy is the format of the request,
     and the number of subscription keys you as an integratior need to manage: 1 key for Default, 2 keys for Legacy.
 
-    # Resource
+    # Documentation
 
-    The default endpoint has a resource field, this field indicates what resource your token should be generated for example, recurring and invoice.
-    The following resources are currently available:
-
-    ```
-    Recurring: https://testapivipps.no/vippsas/recurring-payment-service
-    ```
-
-    ```
-    Invoice ISP: https://testapivipps.no/vippsas/invoice-isp-service
-    ```
-
-    ```
-    Invoice IPP: https://testapivipps.no/vippsas/invoice-ipp-service
-    ```
+    See: https://github.com/vippsas/vipps-accesstoken-api
   version: "1.0"
   title: "Vipps Access Token"
   contact: {}
 host: "apitest.vipps.no"
-basePath: /api/v2
+basePath: /api/
 schemes:
   - https
 securityDefinitions:
@@ -50,8 +38,10 @@ security:
   - apiKeyHeader: []
   - apiKeyQuery: []
 paths:
-  /jwt:
+  /v2/accesstoken/jwt:
     post:
+      tags:
+        - Authorization Service (default)
       summary: "Obtain Access Token (default version)"
       description: "Obtain the JWT access token that needs to be passed in every API request in the Authorization header."
       operationId: "obtain-access-token-by-post"
@@ -69,18 +59,17 @@ paths:
           schema:
             $ref: "#/definitions/accessToken"
         400:
-          description: "This error can happen, if 'client_id' or'resource' is not\
-            \ correct."
+          description: "This error indicates that the 'client_id' or 'resource' is incorrect."
           schema:
             $ref: "#/definitions/error"
         401:
-          description: "This error can happen, if 'client_secret' is not correct."
+          description: "This error indicates that 'client_secret' is incorrect."
           schema:
             $ref: "#/definitions/error"
   /accesstoken/get:
     post:
       tags:
-        - Authorization Service
+        - Authorization Service (legacy)
       summary: Fetch authorization token (legacy version)
       parameters:
         - name: client_id
@@ -162,23 +151,30 @@ definitions:
     properties:
       client_id:
         type: "string"
-        description: "client_id is a guid formatted string and is received when merchant\
-          \ registered the application. Sometime Vipps system register the application\
-          \ on behalf of merchant to ease the process."
+        description: >-
+          client_id is a guid formatted string and is received when merchant
+          registered the application. Sometime Vipps system register the application
+          on behalf of merchant to ease the process.
       client_secret:
         type: "string"
-        description: "client_secret is a base 64 string and is received when merchant\
-          \ registered the application. Sometime Vipps system register the application\
-          \ on behalf of merchant to ease the process."
+        description: >-
+          client_secret is a base 64 string and is received when merchant
+          registered the application. Sometime Vipps system register the application
+          on behalf of merchant to ease the process.
       resource:
         type: "string"
-        description: "This parameter is required to issue the access token for a\
-          \ particular service product registered in Vipps, such as \
-          \ eCommerce, InApp, Invoices, PSP, Ministore services. The format of the\
-          \ resource parameter looks like a URL."
+        description: >-
+          This parameter is required to issue the access token for a
+          particular service product registered in Vipps, such as
+          eCommerce, InApp, Invoices, PSP, Ministore services. The format of the
+          resource parameter looks like a URL.
         example: "https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162"
-    example: "{\n   \"client_id\":\"<clientId>\",\n   \"client_secret\":\"<clientSecret>\"\
-      ,\n   \"resource\":\"<resource>\"\n}"
+    example: >-
+      {
+        "client_id":"<clientId>",
+        "client_secret":"<clientSecret>",
+        "resource":"<resource>"
+      }
   accessToken:
     type: "object"
     required:
@@ -192,38 +188,33 @@ definitions:
     properties:
       token_type:
         type: "string"
-        description: "It’s a bearer type token. When used the word ‘Bearer’ must be\
-          \ added before the token value. However the 'Bearer' word is optional and\
-          \ case insensitive in Vipps system while using in 'Authorization' header\
-          \ of the merchant request."
+        description: >-
+          It’s a `Bearer` token. The word `Bearer` should be added before the token, but this is optional and case insensitive in Vipps.
         example: "Bearer"
       expires_in:
         type: "string"
-        description: "Token expiry duration in seconds"
+        description: "Token expiry duration in seconds."
         example: "86398"
       ext_expires_in:
         type: "string"
-        description: "Extra expiry time. This is zero only"
+        description: "Extra expiry time. This is always zero."
         example: "0"
       expires_on:
         type: "string"
-        description: "Token expiry time in epoch time format"
+        description: "oken expiry time in epoch time format."
         example: "1495271273"
       not_before:
         type: "string"
-        description: "Token creation time in epoch time format"
+        description: "Token creation time in epoch time format."
         example: "1495184574"
       resource:
         type: "string"
-        description: "For the product for which token has been issued"
+        description: "For the product for which token has been issued."
         example: "https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162"
       access_token:
         type: "string"
-        description: "This is the actual access token that needs to be used in 'Authorization'\
-          \ request header with 'bearer ' prefix. Please add an space after 'bearer'\
-          \ word"
-        example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InowMzl6ZHNGdWl6cEJm\
-          \ <...>"
+        description: "The actual access token that needs to be used in `Authorization` request header."
+        example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InowMzl6ZHNGdWl6cEJm <...>"
     example: "{\n  \"token_type\": \"Bearer\",\n  \"expires_in\": \"86398\",\n  \"\
       ext_expires_in\": \"0\",\n  \"expires_on\": \"1495271273\",\n  \"not_before\"\
       : \"1495184574\",\n  \"resource\": \"https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162\"\
