@@ -35,7 +35,7 @@ for more details.
 Shortly summarized, you will have to make a request similar to the one below, with the placeholders replaced with real values:
 
 ```http
-POST https://apitest.vipps.no/api/v2/access-token/jwt HTTP/1.1
+POST https://apitest.vipps.no/api/v2/accesstoken/jwt HTTP/1.1
 Host: apitest.vipps.no
 Content-Type: application/json
 Ocp-Apim-Subscription-Key: <Ocp-Apim-Subscription-Key>
@@ -49,6 +49,8 @@ Ocp-Apim-Subscription-Key: <Ocp-Apim-Subscription-Key>
 ```
 
 The `Ocp-Apim-Subscription-Key` is a required header, and it is the same subscription key as for the product itself.
+
+The explicit `jwt` allows us to, at some point, offer different types of access tokens.
 
 ### Resource
 
