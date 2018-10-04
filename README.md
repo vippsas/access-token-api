@@ -2,7 +2,7 @@
 
 This repository contains developer resources for the Vipps Access Token API.
 
-**IMPORTANT:** This is a work in progress. And so far: Mostly copy & paste from Confluence, with some light validation and clean-up.
+**IMPORTANT:** This is a work in progress. The final Access Token API may differ.
 
 See the Vipps Developers repository for
 a "getting started" guide,
