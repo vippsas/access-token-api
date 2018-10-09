@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Vipps Access Token API contains the endpoints to issue JWT access token from Azure AD. Vipps merchant apis access is authorized againstthis access token. Client should get the access token from this service and use it in 'Authorization' header of the request while calling the business services.\nVipps is currently providing two (2) authorization token endpoints: * The *default* endpoint is the _new_ endpoint and will be provided for all API products. * The *legacy* endpoint can be utilized as-is on existing products for now.\n# Differences between default and legacy endpoints\nThe main differences between Default and Legacy is the format of the request, and the number of subscription keys you as an integratior need to manage: 1 key for Default, 2 keys for Legacy.\n# Documentation\nSee: https://github.com/vippsas/vipps-accesstoken-api",
+    "description": "Vipps Access Token API contains the endpoints to issue JWT access token from Azure AD. Vipps merchant apis access is authorized againstthis access token. Client should get the access token from this service and use it in 'Authorization' header of the request while calling the business services.\nThe access token is valid for 24 hours.\nVipps is currently providing two (2) authorization token endpoints: * The *default* endpoint is the _new_ endpoint and will be provided for all API products. * The *legacy* endpoint can be utilized as-is on existing products for now.\n# Differences between default and legacy endpoints\nThe main differences between Default and Legacy is the format of the request, and the number of subscription keys you as an integratior need to manage: 1 key for Default, 2 keys for Legacy.\n# Documentation\nSee: https://github.com/vippsas/vipps-accesstoken-api",
     "version": "1.0",
     "title": "Vipps Access Token",
     "contact": {}
@@ -38,7 +38,7 @@
           "Authorization Service (default)"
         ],
         "summary": "Obtain Access Token (default version)",
-        "description": "Obtain the JWT access token that needs to be passed in every API request in the Authorization header.",
+        "description": "Obtain the JWT access token that needs to be passed in every API request in the Authorization header. The access token is valid for 24 hours.",
         "operationId": "obtain-access-token-by-post",
         "consumes": [
           "application/json"
@@ -85,7 +85,7 @@
           {
             "name": "client_id",
             "in": "header",
-            "description": "Client ID received when merchant registered the application",
+            "description": "client_id received when merchant registered the application",
             "required": false,
             "type": "string",
             "format": "guid"
@@ -93,7 +93,7 @@
           {
             "name": "client_secret",
             "in": "header",
-            "description": "Client Secret received when merchant registered the application",
+            "description": "client_secret received when merchant registered the application",
             "required": false,
             "type": "string"
           },
@@ -105,7 +105,7 @@
             "type": "string"
           }
         ],
-        "description": "Authorization token API endpoint helps to get the JWT Bearer token that needs to be passed in every API request in the authorization header. The merchant application use the API to get a JWT access token. JWT access token is a base 64 encoded string value that must be aquire first before making any Vipps api calls",
+        "description": "Authorization token API endpoint helps to get the JWT Bearer token that needs to be passed in every API request in the authorization header. The merchant application use the API to get a JWT access token. JWT access token is a base 64 encoded string value that must be aquire first before making any Vipps api calls. The access token is valid for 24 hours.",
         "operationId": "fetchAuthorizationTokenUsingPost",
         "consumes": [
           "application/json;charset=UTF-8"
@@ -244,7 +244,7 @@
         },
         "access_token": {
           "type": "string",
-          "description": "The actual access token that needs to be used in `Authorization` request header.",
+          "description": "The actual access token that needs to be used in `Authorization` request header. The access token is valid for 24 hours.",
           "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InowMzl6ZHNGdWl6cEJm <...>"
         }
       },
