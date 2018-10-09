@@ -2,7 +2,7 @@
 
 This repository contains developer resources for the Vipps Access Token API.
 
-**IMPORTANT:** 💥 This is a work in progress! 💥 The _legacy_ access token API is as coumented here, but the _new_ (and soon default) Access Token API may differ. Input is appreciated.
+**IMPORTANT:** 💥 This is a work in progress! 💥 The _legacy_ access token API is as documented here, but the _new_ (and soon default) access token API may differ slightly. Input is appreciated.
 
 See the Vipps Developers repository for
 a "getting started" guide,
