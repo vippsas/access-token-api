@@ -24,81 +24,57 @@ info:
   title: "Vipps Access Token"
   contact: {}
 host: "apitest.vipps.no"
-basePath: /api/
+basePath: /accesstoken/
 schemes:
   - https
-securityDefinitions:
-  apiKeyHeader:
-    type: "apiKey"
-    name: "Ocp-Apim-Subscription-Key"
-    in: "header"
-  apiKeyQuery:
-    type: "apiKey"
-    name: "subscription-key"
-    in: "query"
-security:
-  - apiKeyHeader: []
-  - apiKeyQuery: []
 paths:
-  /v2/accesstoken/jwt:
+  /get:
     post:
       tags:
-        - Authorization Service (default)
-      summary: "Obtain Access Token (default version)"
-      description: "Obtain the JWT access token that needs to be passed in every API request in the Authorization header. The access token is valid for 24 hours."
-      operationId: "obtain-access-token-by-post"
-      consumes:
-      - "application/json"
-      parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/accessTokenRequest"
-      responses:
-        200:
-          description: "OK"
-          schema:
-            $ref: "#/definitions/accessToken"
-        400:
-          description: "This error indicates that the 'client_id' or 'resource' is incorrect."
-          schema:
-            $ref: "#/definitions/error"
-        401:
-          description: "This error indicates that 'client_secret' is incorrect."
-          schema:
-            $ref: "#/definitions/error"
-  /accesstoken/get:
-    post:
-      tags:
-        - Authorization Service (legacy)
-      summary: Fetch authorization token (legacy version)
+        - Authorization Service
+      summary: Fetch authorization token
       parameters:
         - name: client_id
           in: header
-          description: client_id received when merchant registered the application
-          required: false
+          description: >-
+            Client id is located in the [developer
+            portal](https://apitest-portal.vipps.no/). Navigate to the
+            ```Applications``` tab and click the ```View secrets``` button to
+            display the client id. See the [getting started
+            guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md)
+            for full guide with images.
+          required: true
           type: string
           format: guid
         - name: client_secret
           in: header
-          description: client_secret received when merchant registered the application
-          required: false
+          description: >-
+            Client secret is located in the [developer
+            portal](https://apitest-portal.vipps.no/). Navigate to the
+            ```Applications``` tab and click the ```View secrets``` button to
+            display the client id. See the [getting started
+            guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md)
+            for full guide with images.
+          required: true
           type: string
         - name: ocp-apim-subscription-key
           in: header
           description: >-
-            Subscription key for eCommerce product. This can be found in User
-            Profile page on Merchant developer portal after merchant account is
-            created
-          required: false
+            The subscription-key for authorization token is located in the
+            [developer portal](https://apitest-portal.vipps.no/). Click the
+            username to the right on the page and select ```Profile``` from the
+            dropdown. The ```DEFAULT_ACCESSTOKEN``` key is the value for
+            subscription-key. See the [getting started
+            guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md)
+            for full guide with images.
+          required: true
           type: string
       description: >-
         Authorization token API endpoint helps to get the JWT Bearer token that
         needs to be passed in every API request in the authorization header. The
         merchant application use the API to get a JWT access token. JWT access
         token is a base 64 encoded string value that must be aquire first before
-        making any Vipps api calls. The access token is valid for 24 hours.
+        making any Vipps api calls
       operationId: fetchAuthorizationTokenUsingPost
       consumes:
         - application/json;charset=UTF-8
@@ -110,7 +86,7 @@ paths:
           schema:
             $ref: '#/definitions/AuthorizationTokenResponse'
         '400':
-          description: Bad request (Missing a required parameter or Bad request formats)
+          description: Bad request (Missing a required parameter or bad request format)
         '401':
           description: Unauthorized
         '402':
@@ -128,137 +104,46 @@ paths:
 definitions:
   AuthorizationTokenResponse:
     type: object
+    required:
+      - token_type
+      - expires_in
+      - ext_expires_in
+      - expires_on
+      - not_before
+      - resource
+      - access_token
     properties:
       token_type:
         type: string
-      access_token:
-        type: string
-      ext_expires_in:
-        type: integer
-      not_before:
-        type: integer
+        description:
+          String containing the type for the Access Token.
+        example: 'Bearer'
       expires_in:
         type: integer
-        format: int32
-      resource:
-        type: string
-  AuthorizationTokenMethod:
-    type: object
-  accessTokenRequest:
-    type: "object"
-    required:
-    - "client_id"
-    - "client_secret"
-    - "resource"
-    properties:
-      client_id:
-        type: "string"
-        description: >-
-          client_id is a guid formatted string and is received when merchant
-          registered the application. Sometime Vipps system register the application
-          on behalf of merchant to ease the process.
-      client_secret:
-        type: "string"
-        description: >-
-          client_secret is a base 64 string and is received when merchant
-          registered the application. Sometime Vipps system register the application
-          on behalf of merchant to ease the process.
-      resource:
-        type: "string"
-        description: >-
-          This parameter is required to issue the access token for a
-          particular service product registered in Vipps, such as
-          eCommerce, InApp, Invoices, PSP, Ministore services. The format of the
-          resource parameter looks like a URL.
-        example: "https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162"
-    example: >-
-      {
-        "client_id":"<clientId>",
-        "client_secret":"<clientSecret>",
-        "resource":"<resource>"
-      }
-  accessToken:
-    type: "object"
-    required:
-    - "access_token"
-    - "expires_in"
-    - "expires_on"
-    - "ext_expires_in"
-    - "not_before"
-    - "resource"
-    - "token_type"
-    properties:
-      token_type:
-        type: "string"
-        description: >-
-          It’s a `Bearer` token. The word `Bearer` should be added before the token, but this is optional and case insensitive in Vipps.
-        example: "Bearer"
-      expires_in:
-        type: "string"
-        description: "Token expiry duration in seconds."
-        example: "86398"
+        description:
+          Token expiry time in seconds.
+        example: 3600
       ext_expires_in:
-        type: "string"
-        description: "Extra expiry time. This is always zero."
-        example: "0"
+        type: integer
+        description:
+          Extra time added to expiry time. Currently disabled.
+        example: 3600
       expires_on:
-        type: "string"
-        description: "oken expiry time in epoch time format."
-        example: "1495271273"
+        type: integer
+        description:
+          Token expiry time in epoch time format.
+        example: 1547823408
       not_before:
-        type: "string"
-        description: "Token creation time in epoch time format."
-        example: "1495184574"
+        type: integer
+        description:
+          Token creation time in epoch time format.
+        example: 1547819508
       resource:
-        type: "string"
-        description: "For the product for which token has been issued."
-        example: "https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162"
+        type: string
+        description:
+          A common resource object. Not used in token validation
+        example: '00000002-0000-0000-c000-000000000000'
       access_token:
-        type: "string"
-        description: "The actual access token that needs to be used in `Authorization` request header. The access token is valid for 24 hours."
-        example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InowMzl6ZHNGdWl6cEJm <...>"
-    example: "{\n  \"token_type\": \"Bearer\",\n  \"expires_in\": \"86398\",\n  \"\
-      ext_expires_in\": \"0\",\n  \"expires_on\": \"1495271273\",\n  \"not_before\"\
-      : \"1495184574\",\n  \"resource\": \"https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162\"\
-      ,\n  \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InowMzl6ZHNGdWl6cEJmQlZLMVRuMjVRSFlPMCIsImtpZCI6InowMzl6ZHNGdWl6cEJmQlZLMVRuMjVRSFlPMCJ9.eyJhdWQiOiIwMDAwMDAwMi0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9lNTExNjUyNi01MWRjLTRjMTQtYjA4Ni1hNWNiNDcxNmJjNGIvIiwiaWF0IjoxNDk1MTg0NTc0LCJuYmYiOjE0OTUxODQ1NzQsImV4cCI6MTQ5NTI3MTI3MywiYWlvIjoiWTJaZ1lGQVdFcmdncnJWbS9wY3ZENDJ6NzI1NUJnQT0iLCJhcHBpZCI6ImQ5YjZjOTlkLTI0NDItNGE1ZC04NGEyLWM1M2E4MDdmZTBjNCIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2U1MTE2NTI2LTUxZGMtNGMxNC1iMDg2LWE1Y2I0NzE2YmM0Yi8iLCJ0aWQiOiJlNTExNjUyNi01MWRjLTRjMTQtYjA4Ni1hNWNiNDcxNmJjNGIiLCJ1dGkiOiJuYTJBczl2SWlVMm12UTRzVUprRkFBIiwidmVyIjoiMS4wIn0.QaopYuvN8jsh82uepLcF-uLqEhdFsRNl6_KrjAva537HHMa2x6w2pL2v96k40QBjD8A_GGHZ-E2VC3QSY-WsPdHUI5Kb4zEQzJ4-_CnMRo3bXavz3Sdo2-1amFKsOY8AFODpqJR0MYqPK_Kr6sSIWL3M_L3wu0rG976HIXllsRLvWBSwDeMgBAUvwWrXCmnVfznOleSxsPbAxZshn3xjuYeJWEAR7ZpJQhjuGpiu0rP7lERTxX_rCnW1cr3m7RfEl6z8e5VQva9AOt4OG5NuIrLJqmhb3KHBa3GusK6KLf-pVjF6fnS5r0ZQ5foP-VqOCiK9CUUATjHEOflgy1ubvA\"\
-      \n}"
-  error:
-    type: "object"
-    required:
-    - "correlation_id"
-    - "error"
-    - "error_codes"
-    - "error_description"
-    - "timestamp"
-    - "trace_id"
-    properties:
-      error:
-        type: "string"
-        example: "unauthorized_client"
-      error_description:
-        type: "string"
-        example: "AADSTS70001: Application with identifier 'e9b6c99d-2442-4a5d-84a2-c53a807fe0c4'\
-          \ was not found in the directory testapivipps.no\\r\\nTrace ID: 3bc2b2a0-d9bb-4c2e-8367-5633866f1300\\\
-          r\\nCorrelation ID: bb2f4093-70af-446a-a26d-ed8becca1a1a\\r\\nTimestamp:\
-          \ 2017-05-19 09:21:28Z\",\n  \"error_codes"
-      error_codes:
-        type: "array"
-        items:
-          type: "number"
-          example: 70001
-      timestamp:
-        type: "string"
-        example: "2017-05-19 09:21:28Z"
-      trace_id:
-        type: "string"
-        example: "3bc2b2a0-d9bb-4c2e-8367-5633866f1300"
-      correlation_id:
-        type: "string"
-        example: "bb2f4093-70af-446a-a26d-ed8becca1a1a"
-    example: "{\n  \"error\": \"unauthorized_client\",\n  \"error_description\": \"\
-      AADSTS70001: Application with identifier 'e9b6c99d-2442-4a5d-84a2-c53a807fe0c4'\
-      \ was not found in the directory testapivipps.no\\r\\nTrace ID: 3bc2b2a0-d9bb-4c2e-8367-5633866f1300\\\
-      r\\nCorrelation ID: bb2f4093-70af-446a-a26d-ed8becca1a1a\\r\\nTimestamp: 2017-05-19\
-      \ 09:21:28Z\",\n  \"error_codes\": [\n    70001\n  ],\n  \"timestamp\": \"2017-05-19\
-      \ 09:21:28Z\",\n  \"trace_id\": \"3bc2b2a0-d9bb-4c2e-8367-5633866f1300\",\n\
-      \  \"correlation_id\": \"bb2f4093-70af-446a-a26d-ed8becca1a1a\"\n}"
+        type: string
+        format: byte
+        example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <snip>'
