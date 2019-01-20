@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Vipps Access Token API contains the endpoints to issue JWT access token from Azure AD. Vipps merchant apis access is authorized againstthis access token. Client should get the access token from this service and use it in 'Authorization' header of the request while calling the business services.\nThe access token is valid for 24 hours.\nVipps is currently providing two (2) authorization token endpoints: * The *default* endpoint is the _new_ endpoint and will be provided for all API products. * The *legacy* endpoint can be utilized as-is on existing products for now.\n# Differences between default and legacy endpoints\nThe main differences between Default and Legacy is the format of the request, and the number of subscription keys you as an integratior need to manage: 1 key for Default, 2 keys for Legacy.\n# Documentation\nSee: https://github.com/vippsas/vipps-accesstoken-api",
+    "description": "Vipps Access Token API contains the endpoints to issue JWT access token from Azure AD. Vipps merchant APIs access is authorized against this access token. Client should get the access token from this service and use it in 'authorization' header of the request while calling the business services.\n\nThe access token is normally valid for 1 hour.\n# Documentation\nSee: https://github.com/vippsas/vipps-accesstoken-api",
     "version": "1.0",
     "title": "Vipps Access Token",
     "contact": {}
