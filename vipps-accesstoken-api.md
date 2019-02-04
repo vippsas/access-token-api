@@ -1,5 +1,7 @@
 # Vipps Access Token API
 
+_** This is a work in progress, and not yet the official version. Please see the API documentation for each product API for current documentation. **_
+
 This is the API documentation for obtaining a Vipps Access Token.
 
 The Swagger documentation is available at https://vippsas.github.io/vipps-accesstoken-api/.
