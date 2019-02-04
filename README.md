@@ -2,7 +2,7 @@
 
 This repository contains developer resources for the Vipps Access Token API.
 
-**IMPORTANT:** 💥 This is a work in progress! 💥
+**IMPORTANT:** 💥 _**This is a work in progress, and not yet the official version. Please see the API documentation for each product API for current documentation.**_ 💥
 
 See the Vipps Developers repository for
 a "getting started" guide,
