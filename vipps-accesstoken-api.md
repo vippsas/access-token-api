@@ -10,7 +10,7 @@ Please use GitHub's built-in functionality for
 [issues](https://github.com/vippsas/vipps-invoice-api/issues)
 and
 [pull requests](https://github.com/vippsas/vipps-invoice-api/pulls),
-or contact us at integration@vipps.no.
+or contact us at [Vipps Integration](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
 
 Document version: 0.1.4.
 
