@@ -128,4 +128,4 @@ All error responses contains an `error` object in the body, with details of the 
 Please use GitHub's built-in functionality for
 [issues](https://github.com/vippsas/vipps-recurring-api/issues),
 [pull requests](https://github.com/vippsas/vipps-recurring-api/pulls),
-or contact us at integration@vipps.no.
+or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
