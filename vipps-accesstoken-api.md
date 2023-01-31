@@ -1,79 +1,84 @@
+<!-- START_METADATA
+---
+title: Vipps Access Token API
+pagination_next: null
+pagination_prev: null
+---
+END_METADATA -->
+
 # Vipps Access Token API
 
-**IMPORTANT:** 💥 _**This is a work in progress, and not yet the official version. Please see the API documentation for each product API for current documentation.**_ 💥
+To make requests to the Vipps APIs you need to:
 
-This is the API documentation for obtaining a Vipps Access Token.
+1. First make a request to get an access token, which is a JWT (JSON Web Token)
+2. Use the access token in the HTTP header of the other API requests,
+   together with the subscription key.
 
-The Swagger documentation is available at https://vippsas.github.io/vipps-accesstoken-api/.
+## Get an access token
 
-Please use GitHub's built-in functionality for
-[issues](https://github.com/vippsas/vipps-invoice-api/issues)
-and
-[pull requests](https://github.com/vippsas/vipps-invoice-api/pulls),
-or contact us at [Vipps Integration](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+All Vipps API calls are authenticated and authorized with an access token
+(JWT bearer token) and an API subscription key:
 
-Document version: 0.1.4.
+| Header Name                 | Header Value                | Description      |
+|:----------------------------|:----------------------------|:-----------------|
+| `Authorization`             | `Bearer <JWT access token>` | Type: Authorization token. |
+| `Ocp-Apim-Subscription-Key` | Base 64 encoded string      | The subscription key for this API. This is available on [portal.vipps.no](https://portal.vipps.no). |
 
-# Obtaining an access token
+All Vipps API requests must include an `Authorization` header with
+a JSON Web Token (JWT), which we call the _access token_.
 
-A valid access token is required in order to call all Vipps APIs.
-The Vipps APIs are provided by
-[Azure API Management](https://docs.microsoft.com/en-us/azure/api-management/api-management-key-concepts) - think of it as the gateway to the API.
+The access token is obtained by calling
+[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/ecom#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+and passing the `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`.
+(We _are_ aware that this is a `POST`, without a body, to an endpoint with
+`get` in the URL, and hope to fix it in a later version of the API. Sorry for the inconvenience.)
 
-In order to obtain an access token, you will need to visit the Vipps Developer Portal and
-retrieve your `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`:
+### Request
 
-| Name                        | Description                                 |
-| --------------------------- | ------------------------------------------- |
-| `client_id`                 | Client ID is a guid formatted string and is received when merchant registered the application. Sometime Vipps system register the application on behalf of merchant to ease the process. |
-| `client_secret`             | Client Secret is a base 64 string and is received when merchant registered the application. Sometime Vipps system register the application on behalf of merchant to ease the process. |        
-| `Ocp-Apim-Subscription-Key` | Subscription key. This is _the same key_ for the access token and the product.  |
+Request to
+[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/ecom#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+(including the Vipps HTTP headers):
 
-See the Vipps Developer Portal
-[getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-developer-portal-getting-started.md)
-for more details.
-
-## Request
-
-Shortly summarized, you will have to make a request similar to the one below, with the placeholders replaced with real values:
-
-```http
-POST https://apitest.vipps.no/api/v2/accesstoken/jwt HTTP/1.1
-Host: apitest.vipps.no
-Content-Type: application/json
-Ocp-Apim-Subscription-Key: <Ocp-Apim-Subscription-Key>
-
-{
-	"client_id":"<client_id>",
-	"client_secret":"<client_secret>",
-	"resource":"https://testapivipps.no/vippsas/invoice-isp-service
-}
-
+```json
+client_id: fb492b5e-7907-4d83-ba20-c7fb60ca35de
+client_secret: Y8Kteew6GE2ZmeycEt6egg==
+Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a
+Merchant-Serial-Number: 123456
+Vipps-System-Name: Acme Enterprises Ecommerce DeLuxe
+Vipps-System-Version: 3.1.2
+Vipps-System-Plugin-Name: Point Of Sale Excellence
+Vipps-System-Plugin-Version 4.5.6
 ```
 
-The `Ocp-Apim-Subscription-Key` is a required header, and it is the same subscription key as for the product itself.
+| Header                        | Description                        | Example value       |
+|-------------------------------|------------------------------------|---------------------|
+| `Merchant-Serial-Number`      | The MSN for the sale unit          | `123456`            |
+| `Vipps-System-Name`           | The name of the solution           | `woocommerce`       |
+| `Vipps-System-Version`        | The version number of the solution | `5.4`               |
+| `Vipps-System-Plugin-Name`    | The name of the plugin             | `vipps-woocommerce` |
+| `Vipps-System-Plugin-Version` | The version number of the plugin   | `1.4.1`             |
 
-The explicit `jwt` allows us to, at some point, offer different types of access tokens.
+The `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key` are unique per
+`merchantSerialNumber` (MSN, i.e. the number of the sale unit).
 
-### Resource
+Please note: Partners should use
+[partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys).
 
-This `resource` field indicates what resource your token should be generated for,
-and this must be a valid Vipps product resource.
+**Please note:** You can have multiple access tokens being used at the same time.
 
-The following resources are currently available:
+**Please note:** We are in process of changing the name of the header
+`Ocp-Apim-Subscription-Key` to `Vipps-Subscription-Key`. We will at some point
+phase out the old name completely, but it is not trivial and will take some time.
+You may encounter both in the developer documentation, and the actual header
+name to send is `Ocp-Apim-Subscription-Key`.
 
-| Resource                    | Description                                 |
-| --------------------------- | ------------------------------------------- |
-| Recurring  |  https://testapivipps.no/vippsas/recurring-payment-service |
-| Invoice ISP  | https://testapivipps.no/vippsas/invoice-isp-service  |
-| Invoice IPP   |  https://testapivipps.no/vippsas/invoice-ipp-service |
+### Response
 
-## Response
+The response from
+[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/ecom#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+is like this:
 
-The request above will return a response similar to this, with the generated `access_token`:
-
-```http
-HTTP 200 OK
+```json
 {
   "token_type": "Bearer",
   "expires_in": "86398",
@@ -81,51 +86,27 @@ HTTP 200 OK
   "expires_on": "1495271273",
   "not_before": "1495184574",
   "resource": "00000002-0000-0000-c000-000000000000",
-  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <continued>"
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <snip>"
 }
 ```
 
-### Details
+The `access_token` is the most important part.
+An explanation of the contents of the access token (the JWT properties):
 
-| Name                        | Description                                 |
-| --------------------------- | ------------------------------------------- |
-| `Bearer`                    | It’s a `Bearer` token. The word `Bearer` should be added before the token, but this is optional and case insensitive in Vipps. |
-| `expires_in`                | Token expiry duration in seconds. |
-| `ext_expires_in`            | Extra expiry time. This is always zero. |
-| `expires_on`                | Token expiry time in epoch time format. |
-| `not_before`                | Token creation time in epoch time format. |
-| `resource`                  | For the product for which token has been issued. |
-| `access_token`              | The actual access token that needs to be used in `Authorization` request header. |
+| Name             | Description                                                                      |
+|------------------|----------------------------------------------------------------------------------|
+| `Bearer`         | It’s a `Bearer` token. The word `Bearer` must be added before the token          |
+| `expires_in`     | Token expiry duration in seconds.                                                |
+| `ext_expires_in` | Extra expiry time. Not used.                                                     |
+| `expires_on`     | Token expiry time in epoch time format.                                          |
+| `not_before`     | Token creation time in epoch time format.                                        |
+| `resource`       | For the product for which token has been issued.                                 |
+| `access_token`   | The actual access token that needs to be used in `Authorization` request header. |
 
-**Please note:** The access token is valid for 24 hours.
+**Please note:** The access token is valid for 1 hour in the test environment
+and 24 hours in the production environment. To be sure that you are using
+correct time please use `expires_in` or `expires_on`.
+The access token is a JWT (JSON Web Token), and uses UTC time.
 
-## Subsequent API calls
-
-Every request to the API needs to have an `Authorization` header with the generated access token.
-
-The header in all API requests should look like this:
-
-```http
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <continued>
-```
-
-# HTTP responses
-
-This API returns the following HTTP statuses in the responses:
-
-| HTTP status         | Description                                 |
-| ------------------- | ------------------------------------------- |
-| `200 OK`            | Request successful.                          |
-| `400 Bad Request`   | Invalid request, see the error for details.  |
-| `401 Unauthorized`  | Invalid credentials.                         |
-| `403 Forbidden`     | Authentication ok, but credentials lacks authorization.  |
-| `500 Server Error`  | An internal Vipps problem.                  |
-
-All error responses contains an `error` object in the body, with details of the problem.
-
-# Questions or comments
-
-Please use GitHub's built-in functionality for
-[issues](https://github.com/vippsas/vipps-recurring-api/issues),
-[pull requests](https://github.com/vippsas/vipps-recurring-api/pulls),
-or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+Problems? See:
+[FAQ: Common errors](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/common-errors-faq)

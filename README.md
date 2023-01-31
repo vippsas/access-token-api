@@ -1,15 +1,22 @@
-# Vipps Access Token API
+<!-- START_METADATA
+---
+title: Introduction
+sidebar_position: 1
+hide_table_of_contents: true
+pagination_next: null
+pagination_prev: null
+---
+END_METADATA -->
 
-This repository contains developer resources for the Vipps Access Token API.
+# Access Token API
 
-**IMPORTANT:** 💥 _**This is a work in progress, and not yet the official version. Please see the API documentation for each product API for current documentation.**_ 💥
+The Access Token API allows you to get a bearer token which can be used for authorizing all of your Vipps API requests.
 
-See the Vipps Developers repository for
-a "getting started" guide,
-information about product activation,
-contact information,
-contribution guidelines,
-etc:
-https://github.com/vippsas/vipps-developers  
+See
+[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
+for information about API keys, product activation, how to make API calls, etc.
 
-You can peruse the API docs at https://vippsas.github.io/vipps-accesstoken-api/
+Review the detailed documentation found here:
+
+* [API guide](vipps-accesstoken-api.md): Developer guide for Access Token API.
+* [API reference](https://vippsas.github.io/vipps-developer-docs/api/ecom): Access Token API reference specifications.
