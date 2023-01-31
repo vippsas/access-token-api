@@ -109,4 +109,4 @@ correct time please use `expires_in` or `expires_on`.
 The access token is a JWT (JSON Web Token), and uses UTC time.
 
 Problems? See:
-[FAQ: Common errors](../faqs/common-errors-faq.md)
+[FAQ: Common errors](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/common-errors-faq)
