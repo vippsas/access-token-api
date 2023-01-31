@@ -12,8 +12,11 @@ info:
   tags:
     - name: Authorization Service
       description: Authorization Service
+  servers:
+    - url: https://apitest.vipps.no
+    - url: https://api.vipps.no
 paths:
-  /get:
+  /accesstoken/get:
     post:
       tags:
         - Authorization Service
@@ -83,8 +86,7 @@ paths:
           description: Unsupported media type
         "500":
           description: Something went wrong from Vipps Server side
-servers:
-  - url: https://apitest.vipps.no/accesstoken/
+
 components:
   schemas:
     AuthorizationTokenResponse:
