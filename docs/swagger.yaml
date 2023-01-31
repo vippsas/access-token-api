@@ -8,12 +8,12 @@ info:
     The access token is valid for 1 hour in the test environment and 24 hours in the production environment.
   version: 1.0.0
   title: Vipps Access Token
-  tags:
-    - name: Authorization Service
-      description: Authorization Service
-  servers:
-    - url: https://apitest.vipps.no
-    - url: https://api.vipps.no
+tags:
+  - name: Authorization Service
+    description: Authorization Service
+servers:
+  - url: https://apitest.vipps.no
+  - url: https://api.vipps.no
 paths:
   /accesstoken/get:
     post:
