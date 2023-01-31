@@ -120,4 +120,4 @@ components:
         access_token:
           type: string
           format: byte
-          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni 
+          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
