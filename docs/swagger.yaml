@@ -3,18 +3,15 @@ info:
   description: >-
     Vipps Access Token API contains the endpoints to issue JWT access token from
     Azure AD. Vipps merchant APIs access is authorized against this access
-    token. Client should get the access token from this service and use it in
+    token. Clients should get the access token from this service and use it in the
     'authorization' header of the request while calling the business services.
-
-
-    The access token is normally valid for 1 hour.
-
-    # Documentation
-
-    See: https://github.com/vippsas/vipps-accesstoken-api
-  version: "1.0"
+    The access token is valid for 1 hour in the test environment and 24 hours in the production environment.
+  version: 1.0.0
   title: Vipps Access Token
   contact: {}
+  tags:
+    - name: Authorization Service
+      description: Authorization Service
 paths:
   /get:
     post:
