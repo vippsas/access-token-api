@@ -67,16 +67,6 @@ paths:
           description: Bad request (Missing a required parameter or bad request format)
         "401":
           description: Unauthorized
-        "402":
-          description: Payment Failed
-        "403":
-          description: Request Forbidden
-        "404":
-          description: Resource Not Found
-        "405":
-          description: Request method not supported
-        "415":
-          description: Unsupported media type
         "500":
           description: Something went wrong from Vipps Server side
 
