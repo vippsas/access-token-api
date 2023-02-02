@@ -8,9 +8,9 @@ pagination_prev: null
 ---
 END_METADATA -->
 
-# Access token API Guide
+# Access token API guide
 
-The Access Token API allows you to get a bearer token which can be used for authorizing all of your Vipps API requests.
+The Access token API allows you to get a bearer token which can be used for authorizing all of your Vipps API requests.
 
 To make requests to the Vipps APIs you need to:
 
