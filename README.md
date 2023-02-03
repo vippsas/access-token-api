@@ -23,7 +23,33 @@ See
 for information about API keys, product activation, how to make API calls, etc.
 
 
-## Get an access token
+## Access tokens
+
+Authentication is based on a token obtained from [POST: /accesstoken/get](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost).
+
+The token must be passed as a Bearer token in the header e.g `Authorization: Bearer <access-token>`.
+
+Access tokens are random strings that represent the authorization of a
+specific application to make Vipps requests.
+
+Access tokens _must_ be kept confidential in transit and storage.
+
+Example:
+
+```text
+"hel39XaKjGH5tkCvIENGPNbsSHz1DLKluOat4qP-A4.WyV61hCK1E2snVs1aOvjOWZOXOayZad0K-Qfo3lLzus"
+```
+
+For more information see [RFC-6749 section 4.1.3-4.1.4](https://tools.ietf.org/html/rfc6749#section-4.1.3).
+
+### Partner authentication
+
+In addition to the normal authentication, we offer [Partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys) which let a partner make API calls on behalf of a merchant.
+
+If you are a Vipps partner managing integrations on behalf of Vipps merchants, you can use your partner API credentials to authenticate, and then send the Merchant Serial Number (MSN) to identify which of your merchants you are acting on behalf of.
+
+
+### Get an access token
 
 All Vipps API calls are authenticated and authorized with an access token
 (JWT bearer token) and an API subscription key:
@@ -39,8 +65,9 @@ a JSON Web Token (JWT), which we call the _access token_.
 The access token is obtained by calling
 [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
 and passing the `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`.
-(We _are_ aware that this is a `POST`, without a body, to an endpoint with
-`get` in the URL, and hope to fix it in a later version of the API. Sorry for the inconvenience.)
+
+Unfortunately, this is a `POST` without a body to an endpoint with
+`get` in the URL. Wed hope to fix it in a later version of the API.
 
 ### Request
 
