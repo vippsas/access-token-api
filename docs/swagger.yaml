@@ -21,7 +21,7 @@ paths:
     post:
       tags:
         - Authorization Service
-      summary: Request a new access topken (JWT bearer token)
+      summary: Request a new access token (JWT bearer token)
       parameters:
         - name: client_id
           in: header
