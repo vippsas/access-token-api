@@ -14,7 +14,7 @@ The Access token API allows you to get a bearer token which can be used for auth
 
 To make requests to the Vipps APIs you need to:
 
-1. First make a request to get an access token, which is a JWT (JSON Web Token).
+1. First make a request to [POST: /accesstoken/get](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) to get an access token, which is a JWT (JSON Web Token).
 2. Use the access token in the HTTP header of the other API requests,
    together with the subscription key.
 
@@ -23,33 +23,8 @@ See
 for information about API keys, product activation, how to make API calls, etc.
 
 
-## Access tokens
 
-Authentication is based on a token obtained from [POST: /accesstoken/get](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost).
-
-The token must be passed as a Bearer token in the header e.g `Authorization: Bearer <access-token>`.
-
-Access tokens are random strings that represent the authorization of a
-specific application to make Vipps requests.
-
-Access tokens _must_ be kept confidential in transit and storage.
-
-Example:
-
-```text
-"hel39XaKjGH5tkCvIENGPNbsSHz1DLKluOat4qP-A4.WyV61hCK1E2snVs1aOvjOWZOXOayZad0K-Qfo3lLzus"
-```
-
-For more information see [RFC-6749 section 4.1.3-4.1.4](https://tools.ietf.org/html/rfc6749#section-4.1.3).
-
-### Partner authentication
-
-In addition to the normal authentication, we offer [Partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys) which let a partner make API calls on behalf of a merchant.
-
-If you are a Vipps partner managing integrations on behalf of Vipps merchants, you can use your partner API credentials to authenticate, and then send the Merchant Serial Number (MSN) to identify which of your merchants you are acting on behalf of.
-
-
-### Get an access token
+## Get an access token
 
 All Vipps API calls are authenticated and authorized with an access token
 (JWT bearer token) and an API subscription key:
@@ -67,9 +42,9 @@ The access token is obtained by calling
 and passing the `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`.
 
 Unfortunately, this is a `POST` without a body to an endpoint with
-`get` in the URL. Wed hope to fix it in a later version of the API.
+`get` in the URL. We hope to fix it in a later version of the API.
 
-### Request
+## Request
 
 Request to
 [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
@@ -86,16 +61,12 @@ Vipps-System-Plugin-Name: Point Of Sale Excellence
 Vipps-System-Plugin-Version 4.5.6
 ```
 
-| Header                        | Description                        | Example value       |
-|-------------------------------|------------------------------------|---------------------|
-| `Merchant-Serial-Number`      | The MSN for the sale unit          | `123456`            |
-| `Vipps-System-Name`           | The name of the solution           | `woocommerce`       |
-| `Vipps-System-Version`        | The version number of the solution | `5.4`               |
-| `Vipps-System-Plugin-Name`    | The name of the plugin             | `vipps-woocommerce` |
-| `Vipps-System-Plugin-Version` | The version number of the plugin   | `1.4.1`             |
-
 The `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key` are unique per
 `merchantSerialNumber` (MSN, i.e. the number of the sale unit).
+
+See the
+[Vipps HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers)
+section for a description of the headers.
 
 Please note: Partners should use
 [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys).
@@ -108,7 +79,7 @@ phase out the old name completely, but it is not trivial and will take some time
 You may encounter both in the developer documentation, and the actual header
 name to send is `Ocp-Apim-Subscription-Key`.
 
-### Response
+## Response
 
 The response from
 [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
