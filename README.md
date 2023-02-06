@@ -35,8 +35,8 @@ and providing these values in the HTTP header:
 * `client_secret` (think of it as the password)
 * `Ocp-Apim-Subscription-Key` (specifies which API products you can access)
 
-Unfortunately, this is a `POST` without a body to an endpoint with
-`get` in the URL. Too late to change it now, sorry.
+(Unfortunately, this is a `POST` without a body, to an endpoint with
+`get` in the URL. Too late to change it now, sorry.)
 
 ## Request
 
@@ -57,14 +57,12 @@ Vipps-System-Plugin-Name: Point Of Sale Excellence
 Vipps-System-Plugin-Version 4.5.6
 ```
 
-The `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key` are unique per
-MSN (Merchant Serial Number, i.e. the unique id of the sale unit).
-
-**Please note:** Partners should use
-[partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys).
-
 **Please note:** You can have multiple access tokens, and they can used at the
 same time as long as they are valid.
+
+**Please note:** Partners should use
+[partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
+if possible.
 
 **Please note:** We are in process of changing the name of the header
 `Ocp-Apim-Subscription-Key` to `Vipps-Subscription-Key`. We will at some point
@@ -95,7 +93,7 @@ An explanation of the contents of the access token (the JWT properties):
 
 | Name             | Description                                                                      |
 |------------------|----------------------------------------------------------------------------------|
-| `Bearer`         | It’s a `Bearer` token. The word `Bearer` must be added before the token          |
+| `token_type`     | It’s a `Bearer` token. The word `Bearer` must be added before the token          |
 | `expires_in`     | Token expiry duration in seconds.                                                |
 | `ext_expires_in` | Extra expiry time. Not used.                                                     |
 | `expires_on`     | Token expiry time in epoch time format.                                          |
