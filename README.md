@@ -26,6 +26,7 @@ To make requests to the Vipps APIs you need to:
 The access token is obtained by calling
 [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
 and providing these values in the HTTP header:
+
 * `client_id` (think of it as the username)
 * `client_secret` (think of it as the password)
 * `Ocp-Apim-Subscription-Key` (specifies which API products you can access)
@@ -64,12 +65,6 @@ same time as long as they are valid.
 **Please note:** Partners should use
 [partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
 if possible.
-
-**Please note:** We are in process of changing the name of the header
-`Ocp-Apim-Subscription-Key` to `Vipps-Subscription-Key`. We will at some point
-phase out the old name completely, but it is not trivial and will take some time.
-You may encounter both in the developer documentation, and the actual header
-name to send is `Ocp-Apim-Subscription-Key`.
 
 ## Response
 
