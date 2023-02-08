@@ -6,6 +6,7 @@ info:
     together with the subscription key.
     The access token is valid for 1 hour in the test environment and
     24 hours in the production environment.
+    For details, see the [API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/access-token-api).
   version: 1.0.1
   title: Access token
 tags:
