@@ -26,6 +26,7 @@ To make requests to the Vipps APIs you need to:
 The access token is obtained by calling
 [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
 and providing these values in the HTTP header:
+
 * `client_id` (think of it as the username)
 * `client_secret` (think of it as the password)
 * `Ocp-Apim-Subscription-Key` (specifies which API products you can access)
