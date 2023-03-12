@@ -1,8 +1,10 @@
 <!-- START_METADATA
 ---
-title: API guide
+title: Access token API guide
+sidebar_label: API guide
 sidebar_position: 1
 hide_table_of_contents: true
+description: Use the Access Token API to get an authorization token that can be used with Vipps MobilePay API requests.
 pagination_next: null
 pagination_prev: null
 ---
@@ -10,11 +12,13 @@ END_METADATA -->
 
 # Access token API guide
 
-All Vipps API requests must include an `Authorization` header with
+Use the Access Token API to get an authorization token that can be used with Vipps MobilePay API requests.
+
+All API requests must include an `Authorization` header with
 a JSON Web Token (JWT), which we call the _access token_.
 The Access token API allows you to get this token.
 
-To make requests to the Vipps APIs you need to:
+To make requests to the Vipps MobilePay APIs you need to:
 
 1. First make a request to
    [`POST: /accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
@@ -45,7 +49,7 @@ is a `POST` without a body, to an endpoint with
 A sample request to
 [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
 (including the
-[Vipps HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers)
+[HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers)
 ):
 
 ```http
@@ -99,7 +103,7 @@ An explanation of the contents of the access token (the JWT properties):
 
 You now have the access token and can make subsequent API calls with the following HTTP headers:
 
-```
+```json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>
 Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 Merchant-Serial-Number: 123456
