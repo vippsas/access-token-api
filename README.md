@@ -36,7 +36,7 @@ and providing these values in the HTTP header:
 * `Ocp-Apim-Subscription-Key` (specifies which API products you can access)
 
 See
-[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
+[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/getting-started)
 for information about API keys, product activation, how to make API calls, etc.
 
 (Unfortunately,
