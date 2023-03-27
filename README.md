@@ -21,14 +21,14 @@ The Access token API allows you to get this token.
 To make requests to the Vipps MobilePay APIs you need to:
 
 1. First make a request to
-   [`POST: /accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+   [`POST: /accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
    to get an access token.
 2. Use the access token from (1) in the HTTP header of the other API requests.
 
 ## Get an access token
 
 The access token is obtained by calling
-[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
 and providing these values in the HTTP header:
 
 * `client_id` (think of it as the username)
@@ -36,20 +36,20 @@ and providing these values in the HTTP header:
 * `Ocp-Apim-Subscription-Key` (specifies which API products you can access)
 
 See
-[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/getting-started)
+[Getting Started](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started)
 for information about API keys, product activation, how to make API calls, etc.
 
 (Unfortunately,
-[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
 is a `POST` without a body, to an endpoint with
 `get` in the URL. Too late to change it now, sorry.)
 
 ## Request
 
 A sample request to
-[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
 (including the
-[HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers)
+[HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers)
 ):
 
 ```http
@@ -67,13 +67,13 @@ Vipps-System-Plugin-Version: 4.5.6
 same time as long as they are valid.
 
 **Please note:** Partners should use
-[partner keys](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/partner-keys)
+[partner keys](https://developer.vippsmobilepay.com/docs/vipps-partner/partner-keys)
 if possible.
 
 ## Response
 
 The response from
-[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
 is like this:
 
 ```json
@@ -119,4 +119,4 @@ correct time please use `expires_in` or `expires_on`.
 The access token is a JWT (JSON Web Token), and uses UTC time.
 
 Problems? See:
-[FAQ: Common errors](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/common-errors-faq)
+[FAQ: Common errors](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/common-errors-faq)
