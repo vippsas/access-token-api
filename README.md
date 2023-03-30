@@ -101,6 +101,11 @@ An explanation of the contents of the access token (the JWT properties):
 | `resource`       | For the product for which token has been issued.                                 |
 | `access_token`   | The actual access token that needs to be used in `Authorization` request header. |
 
+**Please note:** The access token is valid for 1 hour in the test environment
+and 24 hours in the production environment. To be sure that you are using
+correct time please use `expires_in` or `expires_on`.
+The access token is a JWT (JSON Web Token), and uses UTC time.
+
 You now have the access token and can make subsequent API calls with the following HTTP headers:
 
 ```json
@@ -113,10 +118,9 @@ Vipps-System-Plugin-Name: acme-webshop
 Vipps-System-Plugin-Version: 4.5.6
 ```
 
-**Please note:** The access token is valid for 1 hour in the test environment
-and 24 hours in the production environment. To be sure that you are using
-correct time please use `expires_in` or `expires_on`.
-The access token is a JWT (JSON Web Token), and uses UTC time.
+**Important:** Remember to specify `Bearer`. If not, you may get a
+`HTTP 401 Unauthorized` error. See the FAQ:
+[Why do I get `HTTP 401 Unauthorized?`](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/common-errors-faq#why-do-i-get-http-401-unauthorized).
 
 Problems? See:
 [FAQ: Common errors](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/common-errors-faq)
