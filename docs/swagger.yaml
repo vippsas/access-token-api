@@ -45,7 +45,7 @@ paths:
           schema:
             type: string
           example: Y8Kteew6GE2ZmeycEt6egg==
-        - $ref: '#/components/parameters/APIM-Subscription-Key'
+        - $ref: '#/components/parameters/Ocp-Apim-Subscription-Key'
         - $ref: '#/components/parameters/Merchant-Serial-Number'
         - $ref: '#/components/parameters/Vipps-System-Name'
         - $ref: '#/components/parameters/Vipps-System-Version'
@@ -139,8 +139,13 @@ components:
         minLength: 4
         maxLength: 6
         example: '123456'
-      description: "The Sales unit's MSN: The unique identifier for the sales unit."
-    APIM-Subscription-Key:
+      description: |-
+        The merchant serial number (MSN) for the sales unit. Partners must always send
+        the Merchant-Serial-Number header, and we recommend that everyone sends it,
+        also when using the merchant's own API keys. The Merchant-Serial-Number header
+        can be used with all API keys, and can speed up any trouble-shooting of API
+        problems quite a bit.
+    Ocp-Apim-Subscription-Key:
       name: Ocp-Apim-Subscription-Key
       in: header
       required: true
