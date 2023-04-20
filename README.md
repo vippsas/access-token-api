@@ -1,6 +1,4 @@
-<!-- START_METADATA
 ---
-title: Access token API guide
 sidebar_label: API guide
 sidebar_position: 1
 hide_table_of_contents: true
@@ -8,7 +6,6 @@ description: Use the Access Token API to get an authorization token that can be 
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # Access token API guide
 
