@@ -60,7 +60,7 @@ Vipps-System-Plugin-Name: acme-webshop
 Vipps-System-Plugin-Version: 4.5.6
 ```
 
-**Please note:** You can have multiple access tokens, and they can used at the
+**Please note:** You can have multiple access tokens, and they can be used at the
 same time as long as they are valid.
 
 **Please note:** Partners should use
