@@ -198,4 +198,4 @@ components:
       schema:
         type: string
         maxLength: 30
-        example: "1.2.1"
+        example: "3.3.4"
