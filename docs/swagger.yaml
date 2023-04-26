@@ -167,7 +167,7 @@ components:
       schema:
         type: string
         maxLength: 30
-        example: woocommerce
+        example: WooCommerce
     Vipps-System-Version:
       name: Vipps-System-Version
       in: header
