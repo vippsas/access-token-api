@@ -44,10 +44,9 @@ is a `POST` without a body, to an endpoint with
 ## Request
 
 A sample request to
-[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
-(including the
-[HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers)
-):
+[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost),
+including the
+[HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers):
 
 ```http
 client_id: fb492b5e-7907-4d83-ba20-c7fb60ca35de
