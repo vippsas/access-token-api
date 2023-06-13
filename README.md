@@ -1,3 +1,4 @@
+<!-- START_METADATA
 ---
 sidebar_label: API guide
 sidebar_position: 1
@@ -6,8 +7,14 @@ description: Use the Access Token API to get an authorization token that can be 
 pagination_next: null
 pagination_prev: null
 ---
+END_METADATA -->
 
 # Access token API guide
+
+<!-- START_COMMENT -->
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/access-token-api/).
+<!-- END_COMMENT -->
 
 Use the Access Token API to get an authorization token that can be used with Vipps MobilePay API requests.
 
