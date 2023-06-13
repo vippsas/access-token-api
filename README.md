@@ -19,7 +19,7 @@ END_METADATA -->
 Use the Access Token API to get an authorization token that can be used with Vipps MobilePay API requests.
 
 All API requests must include an `Authorization` header with
-a JSON Web Token (JWT), which we call the _access token_.
+a JSON Web Token (JWT), which we call the *access token*.
 The Access token API allows you to get this token.
 
 To make requests to the Vipps MobilePay APIs you need to:
