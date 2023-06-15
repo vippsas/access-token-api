@@ -132,7 +132,7 @@ components:
     Merchant-Serial-Number:
       name: Merchant-Serial-Number
       in: header
-      required: true
+      required: false
       schema:
         type: string
         pattern: '^[0-9]{4,6}$'
