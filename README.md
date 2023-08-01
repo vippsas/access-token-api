@@ -70,7 +70,7 @@ Vipps-System-Plugin-Version: 4.5.6
 same time as long as they are valid.
 
 **Please note:** Partners should use
-[partner keys](https://developer.vippsmobilepay.com/docs/vipps-partner/partner-keys)
+[partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys)
 if possible.
 
 ## Response
