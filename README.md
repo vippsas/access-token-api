@@ -40,7 +40,7 @@ and providing these values in the HTTP header:
 * `Ocp-Apim-Subscription-Key` (specifies which API products you can access)
 
 See
-[Getting Started](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started)
+[Getting Started](https://developer.vippsmobilepay.com/docs/getting-started)
 for information about API keys, product activation, how to make API calls, etc.
 
 (Unfortunately,
@@ -53,7 +53,7 @@ is a `POST` without a body, to an endpoint with
 A sample request to
 [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost),
 including the
-[HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers):
+[HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers):
 
 ```http
 client_id: fb492b5e-7907-4d83-ba20-c7fb60ca35de
@@ -70,7 +70,7 @@ Vipps-System-Plugin-Version: 4.5.6
 same time as long as they are valid.
 
 **Please note:** Partners should use
-[partner keys](https://developer.vippsmobilepay.com/docs/vipps-partner/partner-keys)
+[partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys)
 if possible.
 
 ## Response
@@ -123,7 +123,7 @@ Vipps-System-Plugin-Version: 4.5.6
 
 **Important:** Remember to specify `Bearer`. If not, you may get a
 `HTTP 401 Unauthorized` error. See the FAQ:
-[Why do I get `HTTP 401 Unauthorized?`](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/common-errors-faq#why-do-i-get-http-401-unauthorized).
+[Why do I get `HTTP 401 Unauthorized?`](https://developer.vippsmobilepay.com/docs/faqs/common-errors-faq#why-do-i-get-http-401-unauthorized).
 
 Problems? See:
-[FAQ: Common errors](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/common-errors-faq)
+[FAQ: Common errors](https://developer.vippsmobilepay.com/docs/faqs/common-errors-faq)
