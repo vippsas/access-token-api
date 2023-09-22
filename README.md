@@ -39,9 +39,9 @@ The access token is obtained by calling
 [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
 and providing these values in the HTTP header:
 
-* `client_id` (think of it as the username)
-* `client_secret` (think of it as the password)
-* `Ocp-Apim-Subscription-Key` (specifies which API products you can access)
+* `client_id` - Client_id for a sales unit.
+* `client_secret` - Client_id for a sales unit.
+* `Ocp-Apim-Subscription-Key` - Subscription key for a sales unit.
 
 See
 [Getting Started](https://developer.vippsmobilepay.com/docs/getting-started)
