@@ -27,7 +27,7 @@ paths:
         - name: client_id
           in: header
           description: |-
-            The `client_id` is available on portal.vipps.no, under the 'Utvikler' tab.
+            The `client_id` is available on portal.vipps.no, under the 'Utvikler' section.
             Think of it as the "username".
           required: true
           schema:
@@ -37,7 +37,7 @@ paths:
         - name: client_secret
           in: header
           description: |-
-            The `client_secret` is available on portal.vipps.no, under the 'Utvikler' tab.
+            The `client_secret` is available on portal.vipps.no, under the 'Utvikler' section.
             Think of it as the "password".
             Keep it secret.
             Vipps will never ask for it, and do not need it.
@@ -152,7 +152,7 @@ components:
         example: da7d5b0e18a84aeda961c0c31b75c2a9
       description: |-
             The subscription key for the authorization token is available on
-            portal.vipps.no, under the 'Utvikler' tab.
+            portal.vipps.no, under the 'Utvikler' section.
             Keep it secret.
             Vipps will never ask for it, and do not need it.
     Vipps-System-Name:
