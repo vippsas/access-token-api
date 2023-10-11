@@ -94,22 +94,22 @@ components:
             This will always be `Bearer`.
           example: Bearer
         expires_in:
-          type: integer
+          type: string
           description: |-
             Token expiry time in seconds.
             The access token is valid for 1 hour in the test environment
             and 24 hours in the production environment.
           example: 3600
         ext_expires_in:
-          type: integer
+          type: string
           description: Extra time added to expiry time. Currently disabled.
           example: 3600
         expires_on:
-          type: integer
+          type: string
           description: Token expiry time in epoch time format.
           example: 1547823408
         not_before:
-          type: integer
+          type: string
           description: Token creation time in epoch time format.
           example: 1547819508
         resource:
