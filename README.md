@@ -127,7 +127,5 @@ Vipps-System-Plugin-Version: 4.5.6
 
 **Important:** Remember to specify `Bearer`. If not, you may get a
 `HTTP 401 Unauthorized` error. See the FAQ:
-[Why do I get `HTTP 401 Unauthorized?`](https://developer.vippsmobilepay.com/docs/faqs/common-errors-faq#why-do-i-get-http-401-unauthorized).
+[Why do I get `HTTP 401 Unauthorized?`](https://developer.vippsmobilepay.com/docs/common-topics/errors#why-do-i-get-http-401-unauthorized).
 
-Problems? See:
-[FAQ: Common errors](https://developer.vippsmobilepay.com/docs/faqs/common-errors-faq)
