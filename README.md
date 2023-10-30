@@ -57,7 +57,7 @@ is a `POST` without a body, to an endpoint with
 A sample request to
 [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost),
 including the
-[HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers):
+[HTTP headers](https://developer.vippsmobilepay.com/docs/knowledge-base/http-headers):
 
 ```http
 client_id: fb492b5e-7907-4d83-ba20-c7fb60ca35de
@@ -127,5 +127,5 @@ Vipps-System-Plugin-Version: 4.5.6
 
 **Important:** Remember to specify `Bearer`. If not, you may get a
 `HTTP 401 Unauthorized` error. See the FAQ:
-[Why do I get `HTTP 401 Unauthorized?`](https://developer.vippsmobilepay.com/docs/common-topics/errors#why-do-i-get-http-401-unauthorized).
+[Why do I get `HTTP 401 Unauthorized?`](https://developer.vippsmobilepay.com/docs/knowledge-base/errors#why-do-i-get-http-401-unauthorized).
 
