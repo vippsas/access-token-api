@@ -108,7 +108,7 @@ paths:
         - name: client_secret
           in: header
           description: |-
-            The `client_secret` is available on portal.vipps.no, under the 'Utvikler' section.
+            The `client_secret` is available on portal.vipps.no, under the 'Developer' section.
             Think of it as the "password".
             Keep it secret.
             Vipps will never ask for it, and do not need it.
