@@ -20,6 +20,13 @@ END_METADATA -->
 [Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/access-token-api/).
 <!-- END_COMMENT -->
 
+**Important:** Some of the new APIs, including the
+[Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/)
+and
+[Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/)
+use a new token endpoint. See
+[Token endpoint](#token-endpoint)
+
 Use the Access Token API to get an authorization token that can be used with Vipps MobilePay API requests.
 
 All API requests must include an `Authorization` header with
@@ -129,3 +136,28 @@ Vipps-System-Plugin-Version: 4.5.6
 `HTTP 401 Unauthorized` error. See the FAQ:
 [Why do I get `HTTP 401 Unauthorized?`](https://developer.vippsmobilepay.com/docs/knowledge-base/errors#why-do-i-get-http-401-unauthorized).
 
+## Token endpoint
+
+Some of the new APIs, including the
+[Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/)
+and
+[Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/)
+use a _new_ token endpoint:
+`POST:/miami/v1/token`.
+
+**Important:* This endpoint will be renamed to
+`POST:/authentication/v1/token`
+later, when the internal technical dependencies are resolved.
+
+Example request to `POST:/miami/v1/token`:
+```
+Example goes here.
+```
+
+Example response from `POST:/miami/v1/token`:
+```
+Example goes here.
+```
+
+There is no plan to change the authentication for the APIs that use
+[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost).
