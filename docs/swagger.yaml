@@ -1,13 +1,24 @@
 openapi: 3.0.0
 info:
   description: |-
-    Access token API contains the endpoints to request a JWT access token.
-    The access token must be provided in all API requests,
-    together with the subscription key.
+    The Access token API is for requesting an access token, which is a JWT (JSON Web Token).
+
+    There are two endpoints:
+    
+    1. `POST:/accesstoken/get`: Used by most APIs, and has been in use for dseveral years.
+    2. `POST:/miami/v1/token`: Used by new APIs, from 2023.
+
+    For `POST:/accesstoken/get`:
+    The access token must be provided in all API requests, together with the subscription key.
     The access token is valid for 1 hour in the test environment and
     24 hours in the production environment.
+
+    For `POST:/miami/v1/token`:
+    The access token must be provided in all API requests (no subscription key needed).
+    The access token is valid for 15 minutes in both the test environment and the production environment.
+
     For details, see the [API Guide](https://developer.vippsmobilepay.com/docs/APIs/access-token-api).
-  version: 1.0.1
+  version: 2.0.0  
   title: Access token
 tags:
   - name: Authorization Service
@@ -72,10 +83,63 @@ paths:
         "401":
           description: Unauthorized
         "500":
-          description: A server error on Vipps' side.
+          description: Server error.
+
+  /authentication/v1/token:
+    post:
+      summary: Get token, the new type.
+      tags: token
+      operationId: fetchToken
+      description: |-
+        This is the new authentication endpoint, based on OAuth (Open Authorization).
+        Requires only `client_id` and `client_secret`.
+        The `Ocp-Apim-Subscription-Key` is not used.
+      parameters:
+        - name: client_id
+          in: header
+          description: |-
+            The `client_id` is available on portal.vipps.no, under the 'Utvikler' section.
+            Think of it as the "username".
+          required: true
+          schema:
+            type: string
+            format: guid
+          example: fb492b5e-7907-4d83-ba20-c7fb60ca35de
+        - name: client_secret
+          in: header
+          description: |-
+            The `client_secret` is available on portal.vipps.no, under the 'Utvikler' section.
+            Think of it as the "password".
+            Keep it secret.
+            Vipps will never ask for it, and do not need it.
+          required: true
+          schema:
+            type: string
+          example: Y8Kteew6GE2ZmeycEt6egg==
+        - $ref: '#/components/parameters/Merchant-Serial-Number'
+        - $ref: '#/components/parameters/Vipps-System-Name'
+        - $ref: '#/components/parameters/Vipps-System-Version'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Name'
+        - $ref: '#/components/parameters/Vipps-System-Plugin-Version'        
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Server error.
 
 components:
   schemas:
+    TokenResponse:
+      type: object
+    
     AuthorizationTokenResponse:
       type: object
       required:
