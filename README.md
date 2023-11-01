@@ -148,7 +148,7 @@ use a _new_ token endpoint:
 **Important:* This endpoint will be renamed to
 `POST:/authentication/v1/token`
 later, when the internal technical dependencies are resolved.
-
+Authenticating with this endpoint is quite similar to the above mentioned flow, but this new endpoints uses a completely standard OAuth client credentials flow, allowing use of standardized libraries. We highly recommend this approach, using one of the [trusted](https://oauth.net/code/) libraries to perform the flow.
 Example request to `POST:/miami/v1/token`:
 ```
 Example goes here.
