@@ -5,8 +5,8 @@ info:
 
     There are two endpoints:
     
-    1. `POST:/accesstoken/get`: Used by most APIs, and has been in use for dseveral years.
-    2. `POST:/miami/v1/token`: Used by new APIs, from 2023.
+    1. `POST:/accesstoken/get`: Used by most APIs, and has been in use for several years.
+    2. `POST:/miami/v1/token`: Used by some new APIs and roles, from 2023.
 
     For `POST:/accesstoken/get`:
     The access token must be provided in all API requests, together with the subscription key.
@@ -70,6 +70,7 @@ paths:
         acquired first before making any Vipps API calls.
         The access token is valid for 1 hour in the test environment
         and 24 hours in the production environment.
+        See: https://developer.vippsmobilepay.com/docs/APIs/access-token-api/
       operationId: fetchAuthorizationTokenUsingPost
       responses:
         "200":
@@ -138,6 +139,14 @@ paths:
 components:
   schemas:
     TokenResponse:
+      description: |-
+        This _new_ accesstoken endpoint is used to get the JWT (JSON Web Token) that
+        must be passed in every API request in the `Authorization` header.
+        The access token is a base64-encoded string value that must be
+        acquired first before making any Vipps API calls.
+        The access token is valid for 15 minutes both in the test environment
+        and in the production environment.
+        See: https://developer.vippsmobilepay.com/docs/APIs/access-token-api/
       type: object
       required:
         - access_token
