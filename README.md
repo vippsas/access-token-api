@@ -35,7 +35,7 @@ use a new token endpoint, _for some roles_:
 | API                       | Merchant: Normal API keys     | Partner: Partner keys     | Partner: Management keys     | Partner: Accounting keys |
 | ------------------------- | ------------- | ------------------------- | ---------------------------- | ------------------------ |
 | [Main APIs](https://developer.vippsmobilepay.com/docs/APIs/#main-apis) |  [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) | [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A | N/A |
-| [Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/)  |[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A | N/A |
+| [Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/)  |[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A | N/A | N/A |
 | [Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/) |[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A | N/A | `POST:/miami/v1/token` |
 
 **Please note:** 
