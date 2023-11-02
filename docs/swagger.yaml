@@ -23,6 +23,8 @@ info:
 tags:
   - name: Authorization Service
     description: Authorization Service
+  - name: Token endpoint
+    description: New token endpoint  
 servers:
   - url: https://api.vipps.no
     description: Production environment (uses the production API keys, the official app and live data)
