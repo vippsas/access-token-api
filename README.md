@@ -28,6 +28,10 @@ and
 [Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/)
 use a new token endpoint, _for some roles_:
 
+* Old/current access token endpoint: [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) 
+* New access token endpoint _for some APIs and roles_:  `POST:/miami/v1/token`
+
+
 | API                       | Merchant: Normal API keys     | Partner: Partner keys     | Partner: Management keys     | Partner: Accounting keys |
 | ------------------------- | ------------- | ------------------------- | ---------------------------- | ------------------------ |
 | [Main APIs](https://developer.vippsmobilepay.com/docs/APIs/#main-apis) |  [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) | [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A | N/A |
