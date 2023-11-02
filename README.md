@@ -149,14 +149,26 @@ use a _new_ token endpoint:
 `POST:/authentication/v1/token`
 later, when the internal technical dependencies are resolved.
 Authenticating with this endpoint is quite similar to the above mentioned flow, but this new endpoints uses a completely standard OAuth client credentials flow, allowing use of standardized libraries. We highly recommend this approach, using one of the [trusted](https://oauth.net/code/) libraries to perform the flow.
+
 Example request to `POST:/miami/v1/token`:
-```
-Example goes here.
+
+```http
+POST https://api.vipps.no/miami/v1/token
+Authorization: Basic <client_id>:<client_secret>
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+
+grant_type=client_credentials
 ```
 
-Example response from `POST:/miami/v1/token`:
-```
-Example goes here.
+Example (JSON) response from `POST:/miami/v1/token`:
+
+```json
+{
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>",
+  "token_type": "Bearer",
+  "expires_in": 900
+}
+
 ```
 
 There is no plan to change the authentication for the APIs that use
