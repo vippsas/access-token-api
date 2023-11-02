@@ -43,6 +43,12 @@ use a new token endpoint, _for some roles_:
 See
 [Token endpoint](#token-endpoint) for details.
 
+**Please note:** The new `POST:/miami/v1/token` will be used for all APIs, but we will not change the
+authentication for existing APIs. A working integration that uses 
+[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) 
+will continue to work as before. There are technical reasons for the two endpoints and the different roles,
+and it's unfortunately no easy way to "streamline" this for all APIs and roles at once.
+
 ## The Access token API
 
 Use the Access Token API to get an authorization token that can be used with Vipps MobilePay API requests.
