@@ -20,12 +20,26 @@ END_METADATA -->
 [Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/access-token-api/).
 <!-- END_COMMENT -->
 
+## Two endpoints
+
 **Important:** Some of the new APIs, including the
 [Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/)
 and
 [Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/)
-use a new token endpoint. See
-[Token endpoint](#token-endpoint)
+use a new token endpoint, _for some roles_:
+
+| API                       | Merchant | Partner: Partner keys | Partner: Management keys | Partner: Accounting keys |
+| ------------------------- | -------- | ------------------------- | ---------------------------- | ------------------- |
+| [Main APIs](https://developer.vippsmobilepay.com/docs/APIs/#main-apis) |  [`POST: /accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) | | N/A | N/A |
+| [Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/)
+| [Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/) | | N/A | N/A | `POST:/miami/v1/token` |
+
+* : Management partners use new endpoint, partners & merchants use the old endpoint.
+* Report API: Accounting partners use new endpoint, merchants use old, partners does not have access
+See
+[Token endpoint](#token-endpoint) for details.
+
+## The Access token API
 
 Use the Access Token API to get an authorization token that can be used with Vipps MobilePay API requests.
 
@@ -137,6 +151,9 @@ Vipps-System-Plugin-Version: 4.5.6
 [Why do I get `HTTP 401 Unauthorized?`](https://developer.vippsmobilepay.com/docs/knowledge-base/errors#why-do-i-get-http-401-unauthorized).
 
 ## Token endpoint
+
+
+
 
 Some of the new APIs, including the
 [Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/)
