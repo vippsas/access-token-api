@@ -35,25 +35,21 @@ use a new token endpoint, _for some roles_:
 | API                       | Merchant: Normal API keys     | Partner: Partner keys     | Partner: Management keys     | Partner: Accounting keys |
 | ------------------------- | ------------- | ------------------------- | ---------------------------- | ------------------------ |
 | [Main APIs](https://developer.vippsmobilepay.com/docs/APIs/#main-apis) |  [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) | [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A | N/A |
-| [Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/)  |[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A |`POST:/miami/v1/token` | `POST:/miami/v1/token` |
+| [Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/)  |[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A | N/A |
 | [Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/) |[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A | N/A | `POST:/miami/v1/token` |
-
-* : Management partners use new endpoint, partners & merchants use the old endpoint.
-* Report API: Accounting partners use new endpoint, merchants use old, partners does not have access
-See
-[Token endpoint](#token-endpoint) for details.
 
 **Please note:** 
 * The new `POST:/miami/v1/token` will be used for all APIs, but we will not change the
   authentication for existing APIs. A working integration that uses 
   [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) 
-   will continue to work as before. There are technical reasons for the two endpoints and the different roles,
-   and it's unfortunately no easy way to "streamline" this for all APIs and roles at once.
+   will continue to work as before. 
+* There are technical reasons for the two endpoints and the different roles,
+  and it's unfortunately no easy way to "streamline" this for all APIs and roles at once.
 * You can have multiple access tokens, and they can be used at the
   same time as long as they are valid.
 * Partners should always use
   [partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys)
-  if possible.
+  when possible.
 
 ## The Access token API: POST:/accesstoken/get
 
