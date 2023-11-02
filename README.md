@@ -28,11 +28,11 @@ and
 [Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/)
 use a new token endpoint, _for some roles_:
 
-| API                       | Merchant | Partner: Partner keys | Partner: Management keys | Partner: Accounting keys |
-| ------------------------- | -------- | ------------------------- | ---------------------------- | ------------------- |
-| [Main APIs](https://developer.vippsmobilepay.com/docs/APIs/#main-apis) |  [`POST: /accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) | | N/A | N/A |
+| API                       | Merchant      | Partner: Partner keys     | Partner: Management keys     | Partner: Accounting keys |
+| ------------------------- | ------------- | ------------------------- | ---------------------------- | ------------------------ |
+| [Main APIs](https://developer.vippsmobilepay.com/docs/APIs/#main-apis) |  [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) | [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A | N/A |
 | [Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/)
-| [Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/) | | N/A | N/A | `POST:/miami/v1/token` |
+| [Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/) |[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A | N/A | `POST:/miami/v1/token` |
 
 * : Management partners use new endpoint, partners & merchants use the old endpoint.
 * Report API: Accounting partners use new endpoint, merchants use old, partners does not have access
@@ -50,7 +50,7 @@ The Access token API allows you to get this token.
 To make requests to the Vipps MobilePay APIs you need to:
 
 1. First make a request to
-   [`POST: /accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+   [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
    to get an access token.
 2. Use the access token from (1) in the HTTP header of the other API requests.
 
