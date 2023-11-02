@@ -189,7 +189,7 @@ Vipps-System-Plugin-Version: 4.5.6
 grant_type=client_credentials
 ```
 
-**Please note:** The `Ocp-Apim-Subscription-Key` HTTP header should _not_ be sent (inlike with the
+**Please note:** The `Ocp-Apim-Subscription-Key` HTTP header should _not_ be sent (unlike with the
 [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
 endpoint).
 
