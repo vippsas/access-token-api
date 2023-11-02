@@ -139,6 +139,29 @@ components:
   schemas:
     TokenResponse:
       type: object
+      required:
+        - access_token
+        - token_type
+        - expires_in
+      properties:
+        token_type:
+          type: string
+          description: |-
+            The type for the access token.
+            This will always be `Bearer`.
+          example: Bearer
+        expires_in:
+          type: string
+          description: |-
+            Token expiry time in seconds. The token is currently valid for 15 minutes.
+          example: 900
+        access_token:
+          type: string
+          format: byte
+          description: |-
+            The access token itself.
+            It is a base64-encoded string, typically 1000+ characters.
+          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>"
     
     AuthorizationTokenResponse:
       type: object
