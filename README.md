@@ -22,6 +22,13 @@ END_METADATA -->
 
 ## Two endpoints
 
+If you are a merchant: Use
+[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) 
+and skip to
+[The Access token API: POST:/accesstoken/get](#the-access-token-api-postaccesstokenget).
+
+If you are a partner: Continue reading this section.
+
 **Important:** Some of the new APIs, including the
 [Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/)
 and
