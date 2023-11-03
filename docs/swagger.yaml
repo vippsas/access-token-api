@@ -91,7 +91,8 @@ paths:
   /miami/v1/token:
     post:
       summary: Get token, the new type.
-      tags: token
+      tags: 
+        - Token endpoint
       operationId: fetchToken
       description: |-
         This is the new authentication endpoint, based on OAuth (Open Authorization).
