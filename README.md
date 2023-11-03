@@ -30,7 +30,7 @@ use a new token endpoint, _for some roles_:
 
 * Access token endpoint: [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) 
 * Token endpoint _for some APIs and roles_: 
-[`POST:/miami/v1/token`](https://developer.vippsmobilepay.com/api/access-token/#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost).token`
+[`POST:/miami/v1/token`](https://developer.vippsmobilepay.com/api/access-token/#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
 
 
 | API                       | Merchant: Normal API keys     | Partner: Partner keys     | Partner: Management keys     | Partner: Accounting keys |
@@ -40,9 +40,14 @@ use a new token endpoint, _for some roles_:
 | [Report API](https://developer.vippsmobilepay.com/docs/APIs/report-api/) |[`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)  | N/A | N/A | [`POST:/miami/v1/token`](https://developer.vippsmobilepay.com/api/access-token/#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) |
 
 **Please note:** 
-* The new
-  [`POST:/miami/v1/token`](https://developer.vippsmobilepay.com/api/access-token/#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
-  will be used for all APIs, but we will not change the
+* For partners: Please see [Partner keys](https://developer.vippsmobilepay.com/docs/partner/partner-keys/).
+  * If you are a partner and have _partner keys_, you use those.
+  * If you are a partner and have _management keys_, you use those.
+  * If you are a partner and has _accounting keys_, you use those.
+  * If you are a merchant you use your normal API keys.
+* The 
+  [`POST:/miami/v1/token`](https://developer.vippsmobilepay.com/api/access-token/#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+  will be used for all new APIs, but we will not change the
   authentication for existing APIs. A working integration that uses 
   [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost) 
    will continue to work as before. 
