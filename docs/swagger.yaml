@@ -22,9 +22,9 @@ info:
   title: Access token
 tags:
   - name: Authorization Service
-    description: Authorization service
+    description: The primary authorization service for Vipps MobilePay APIs.
   - name: Token endpoint
-    description: Token authorization for partners
+    description: A token authorization for partners in certain roles.
 servers:
   - url: https://api.vipps.no
     description: Production environment (uses the production API keys, the official app and live data)
@@ -96,7 +96,7 @@ paths:
         - Token endpoint
       operationId: fetchToken
       description: |-
-        This is an authentication endpoint for partner use.
+        This is a token endpoint for partners in certain roles.
         This is based on OAuth (Open Authorization) and requires only `client_id` and `client_secret`.
         The `Ocp-Apim-Subscription-Key` is not used.
       parameters:
