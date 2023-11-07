@@ -99,6 +99,8 @@ paths:
         This is a token endpoint for partners in certain roles.
         This is based on OAuth (Open Authorization) and requires only `client_id` and `client_secret`.
         The `Ocp-Apim-Subscription-Key` is not used.
+        *Important:* This endpoint will be renamed to `/authentication/v1/token later,
+        when the internal technical dependencies are resolved.
       parameters:
         - name: client_id
           in: header
