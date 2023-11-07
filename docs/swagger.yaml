@@ -22,7 +22,7 @@ info:
   title: Access token
 tags:
   - name: Authorization Service
-    description: Authorization service for merchants
+    description: Authorization service
   - name: Token endpoint
     description: Token authorization for partners
 servers:

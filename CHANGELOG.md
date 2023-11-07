@@ -17,6 +17,7 @@ To learn about API versioning, see
 
 ## November 2023
 
-* Added new type of access token for partners: [api/access-token#tag/Token-endpoint/operation/fetchToken](https://developer.vippsmobilepay.com/api/access-token/#tag/Token-endpoint),
+* Added new type of access token for partners in certain roles: [`POST:/miami/v1/token`][token-endpoint],
 for use with all new Vipps MobilePay APIs.
 
+[token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Token-endpoint/operation/fetchToken
