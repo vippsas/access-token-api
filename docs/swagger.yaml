@@ -22,9 +22,9 @@ info:
   title: Access token
 tags:
   - name: Authorization Service
-    description: Authorization Service
+    description: Authorization service for merchants
   - name: Token endpoint
-    description: New token endpoint  
+    description: Token authorization for partners
 servers:
   - url: https://api.vipps.no
     description: Production environment (uses the production API keys, the official app and live data)
@@ -35,7 +35,7 @@ paths:
     post:
       tags:
         - Authorization Service
-      summary: Request a new access token (JWT bearer token)
+      summary: Request an access token (JWT bearer token)
       parameters:
         - name: client_id
           in: header
@@ -66,10 +66,11 @@ paths:
         - $ref: '#/components/parameters/Vipps-System-Plugin-Version'
 
       description: |-
-        The accesstoken endpoint is used to get the JWT (JSON Web Token) that
+        This is an authentication endpoint for merchant use.
+        The access token endpoint is used to get the JWT (JSON Web Token) that
         must be passed in every API request in the `Authorization` header.
         The access token is a base64-encoded string value that must be
-        acquired first before making any Vipps API calls.
+        acquired first before making any Vipps MobilePay API calls.
         The access token is valid for 1 hour in the test environment
         and 24 hours in the production environment.
         See: https://developer.vippsmobilepay.com/docs/APIs/access-token-api/
@@ -90,13 +91,13 @@ paths:
 
   /miami/v1/token:
     post:
-      summary: Get token, the new type.
+      summary: Request an access token.
       tags: 
         - Token endpoint
       operationId: fetchToken
       description: |-
-        This is the new authentication endpoint, based on OAuth (Open Authorization).
-        Requires only `client_id` and `client_secret`.
+        This is an authentication endpoint for partner use.
+        This is based on OAuth (Open Authorization) and requires only `client_id` and `client_secret`.
         The `Ocp-Apim-Subscription-Key` is not used.
       parameters:
         - name: client_id
@@ -146,7 +147,7 @@ components:
         This _new_ accesstoken endpoint is used to get the JWT (JSON Web Token) that
         must be passed in every API request in the `Authorization` header.
         The access token is a base64-encoded string value that must be
-        acquired first before making any Vipps API calls.
+        acquired first before making any Vipps MobilePay API calls.
         The access token is valid for 15 minutes both in the test environment
         and in the production environment.
         See: https://developer.vippsmobilepay.com/docs/APIs/access-token-api/
