@@ -194,7 +194,7 @@ Example request to
 
 ```http
 POST https://api.vipps.no/miami/v1/token
-Authorization: Basic <client_id>:<client_secret>
+Authorization: Basic <base64_encoded_credentials>
 Content-Type: application/x-www-form-urlencoded; charset=utf-8
 Merchant-Serial-Number: 123456
 Vipps-System-Name: acme
@@ -204,6 +204,8 @@ Vipps-System-Plugin-Version: 4.5.6
 
 grant_type=client_credentials
 ```
+
+`<base64_encoded_credentials>` is the string `<client_id>:<client_secret>` encoded to Base64.
 
 **Please note:** The `Ocp-Apim-Subscription-Key` HTTP header should *not* be sent (unlike with the
 [`POST:/accesstoken/get`][access-token-endpoint]
